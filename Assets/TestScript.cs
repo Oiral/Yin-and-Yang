@@ -47,8 +47,8 @@ public class TestScript : MonoBehaviour {
                     int[] newTile = new int[] { x + mod[0], z + mod[1] };
                     if (((newTile[0] < 0 || newTile[0] >= xAmount) || (newTile[1] < 0 || newTile[1] >= zAmount)) == false)
                     {
-                        topConnectionScript.connections.Add((tiles[newTile[0],newTile[1]]).GetComponent<TileScript>().topPoint.gameObject);
-                        bottomConnectionScript.connections.Add((tiles[newTile[0], newTile[1]]).GetComponent<TileScript>().bottomPoint.gameObject);
+                        topConnectionScript.connections.Add((tiles[newTile[0],newTile[1]]).GetComponent<TileScript>().topPoint);
+                        bottomConnectionScript.connections.Add((tiles[newTile[0], newTile[1]]).GetComponent<TileScript>().bottomPoint);
                     }
 
                 }

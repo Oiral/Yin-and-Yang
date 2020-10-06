@@ -6,8 +6,8 @@ public enum Direction { North, East, South, West };
 
 public class PlayerMovement : MonoBehaviour {
 
-    public GameObject targetTile;
-    GameObject startingTile;
+    public TileConnectionsScript targetTile;
+    TileConnectionsScript startingTile;
     public float respawnTime = 2;
     public GameObject otherPlayer;
 
@@ -37,8 +37,13 @@ public class PlayerMovement : MonoBehaviour {
         {
             return false;
         }
-        foreach (GameObject tile in targetTile.GetComponent<TileConnectionsScript>().connections)
+        targetTile.UpdateConnections();
+
+        foreach (TileConnectionsScript tile in targetTile.connections)
         {
+            Debug.Log(targetTile);
+            Debug.Log(tile);
+
             if (CheckDirection(targetTile.transform.position, tile.transform.position) == dir)
             {
                 DisableMovementInput(0.23f);
@@ -80,7 +85,7 @@ public class PlayerMovement : MonoBehaviour {
         return false;
     }
     
-    void MovePlayer(GameObject tile)
+    void MovePlayer(TileConnectionsScript tile)
     {
         targetTile = tile;
 

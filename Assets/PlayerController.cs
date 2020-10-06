@@ -11,19 +11,19 @@ public class PlayerController : MonoBehaviour {
 
     // Update is called once per frame
     void Update () {
-		if (Input.GetButtonDown("Up"))
+		if (Input.GetButtonDown("up"))
 		{
             Move(Direction.North);
         }
-		if (Input.GetButtonDown("Down"))
+		if (Input.GetButtonDown("down"))
         {
             Move(Direction.South);
         }
-		if (Input.GetButtonDown("Left"))
+		if (Input.GetButtonDown("left"))
         {
             Move(Direction.West);
         }
-		if (Input.GetButtonDown("Right"))
+		if (Input.GetButtonDown("right"))
         {
             Move(Direction.East);
         }
@@ -40,7 +40,7 @@ public class PlayerController : MonoBehaviour {
         if (selectedMoveScript.MovePlayer(dir, true))
         {
             //Debug.Log("Move Other Player");
-            otherMoveScript.MovePlayer(dir, false);
+            //otherMoveScript.MovePlayer(dir, false);
         }
     }
     public void TouchInputs(string dir)
