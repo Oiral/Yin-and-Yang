@@ -46,11 +46,18 @@ public class TileConnectionsScript : MonoBehaviour {
                 continue;
             if (connections.Contains(tileCon))
                 continue;
-            if (Vector3.Distance(tileCon.gameObject.transform.position, this.transform.position) > distanceCheck)
-                continue;
             if (tileCon.side != side)
                 continue;
 
+            if (Vector3.Distance(tileCon.gameObject.transform.position, this.transform.position) > distanceCheck)
+            {
+                //If the tile is not in the correct distance
+                if (CheckInHoriRange(this, tileCon) && CheckInVertRange(this, tileCon))
+                {
+                    connections.Add(tileCon);
+                }
+                continue;
+            }
 
             connections.Add(tileCon);
             tileCon.connections.Add(this);
@@ -66,9 +73,16 @@ public class TileConnectionsScript : MonoBehaviour {
 
             if (Vector3.Distance(connections[i].gameObject.transform.position, this.transform.position) > distanceCheck)
             {
-                connections[i].connections.Remove(this);
-                connections.Remove(connections[i]);
+                if (CheckInHoriRange(this, connections[i]) && CheckInVertRange(this, connections[i]))
+                {
+                    continue;
+                }
 
+                if (connections[i].connections.Contains(this))
+                {
+                    connections[i].connections.Remove(this);
+                }
+                connections.Remove(connections[i]);
             }
         }
 
@@ -82,6 +96,40 @@ public class TileConnectionsScript : MonoBehaviour {
             }
         }
         */
+    }
+
+    bool CheckInHoriRange(TileConnectionsScript myTile, TileConnectionsScript otherTile)
+    {
+        Vector3 myPos = myTile.transform.position;
+        Vector3 theirPos = otherTile.gameObject.transform.position;
+
+        myPos.y = 0;
+        theirPos.y = 0;
+
+        float horizontalDist = Vector3.Distance(myPos, theirPos);
+
+        return (horizontalDist < distanceCheck);
+    }
+
+    bool CheckInVertRange(TileConnectionsScript myTile, TileConnectionsScript otherTile)
+    {
+        Vector3 myPos = myTile.transform.position;
+        Vector3 theirPos = otherTile.gameObject.transform.position;
+
+        float heightDif = myPos.y - theirPos.y;
+
+        if (side == TileSide.Top && heightDif > 0)
+        {
+            return true;
+        }
+        else if (side == TileSide.Bottom && heightDif < 0)
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
     }
 
 }

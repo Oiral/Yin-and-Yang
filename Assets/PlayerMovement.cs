@@ -37,12 +37,10 @@ public class PlayerMovement : MonoBehaviour {
         {
             return false;
         }
-        targetTile.UpdateConnections();
+        //targetTile.UpdateConnections();
 
         foreach (TileConnectionsScript tile in targetTile.connections)
         {
-            Debug.Log(targetTile);
-            Debug.Log(tile);
 
             if (CheckDirection(targetTile.transform.position, tile.transform.position) == dir)
             {
@@ -130,7 +128,7 @@ public class PlayerMovement : MonoBehaviour {
         transform.rotation = rotation;
 
         //Play the animation
-        turtleAnimator.SetTrigger("Move");
+        //turtleAnimator.SetTrigger("Move");
         //SoundManager.instance.PlaySound("walkSummer");
     }
 

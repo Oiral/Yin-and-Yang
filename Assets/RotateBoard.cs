@@ -19,7 +19,7 @@ public class RotateBoard : MonoBehaviour {
     private void Start()
     {
         cRI = 0;
-        backGroundMaterial.SetFloat("_DayNight", cRI);
+        //backGroundMaterial.SetFloat("_DayNight", cRI);
     }
 
     private void OnDrawGizmos()
@@ -49,12 +49,12 @@ public class RotateBoard : MonoBehaviour {
             transform.Rotate(rotationValue, 0, 0);
             //transform.Rotate(new Vector3(1, 0, 1), rotationValue);
             //Change background colour
-            backGroundMaterial.SetFloat("_DayNight", rotationColourCurve.Evaluate(Mathf.Abs(i/framesOfRotation - oldCRI)));
+            //backGroundMaterial.SetFloat("_DayNight", rotationColourCurve.Evaluate(Mathf.Abs(i/framesOfRotation - oldCRI)));
             //End
             accumulatedRotation += rotationValue;
             yield return new WaitForEndOfFrame();
         }
-        backGroundMaterial.SetFloat("_DayNight", cRI);
+        //backGroundMaterial.SetFloat("_DayNight", cRI);
         transform.Rotate(180 - accumulatedRotation, 0, 0);
         //transform.Rotate(new Vector3(1, 0, 1), 180 - accumulatedRotation);
 

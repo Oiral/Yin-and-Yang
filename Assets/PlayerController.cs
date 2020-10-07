@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour {
 
@@ -8,6 +9,8 @@ public class PlayerController : MonoBehaviour {
     public PlayerMovement otherMoveScript;
 
     public RotateBoard rotateScript;
+
+    public UnityEvent onMove;
 
     // Update is called once per frame
     void Update () {
@@ -31,7 +34,7 @@ public class PlayerController : MonoBehaviour {
         {
             selectedMoveScript.DisableMovementInputOnRotation(rotateScript.waitTime + rotateScript.framesOfRotation * 0.02f);
             rotateScript.BeginRotation();
-            //FlipSelected();
+            FlipSelected();
         }
     }
 
@@ -40,9 +43,11 @@ public class PlayerController : MonoBehaviour {
         if (selectedMoveScript.MovePlayer(dir, true))
         {
             //Debug.Log("Move Other Player");
-            //otherMoveScript.MovePlayer(dir, false);
+            otherMoveScript.MovePlayer(dir, false);
+            onMove.Invoke();
         }
     }
+
     public void TouchInputs(string dir)
     {
         switch (dir)
@@ -67,5 +72,8 @@ public class PlayerController : MonoBehaviour {
         PlayerMovement temp = selectedMoveScript;
         selectedMoveScript = otherMoveScript;
         otherMoveScript = temp;
+
+        onMove.Invoke();
     }
+
 }
