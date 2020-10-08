@@ -58,18 +58,24 @@ public class PlayerMovement : MonoBehaviour {
                         if (targetTile.gameObject.transform.parent == otherPlayer.GetComponent<PlayerMovement>().targetTile.gameObject.transform.parent && primary)
                         {
                             MovePlayer(tile);
-                            Instantiate(winParticlePrefab, targetTile.transform.position, targetTile.transform.rotation, null);
+                            if (winParticlePrefab != null)
+                            {
+                                Instantiate(winParticlePrefab, targetTile.transform.position, targetTile.transform.rotation, null);
+                            }
                             //Play the win Animation
-                            turtleAnimator.SetTrigger("Win");
+                            //turtleAnimator.SetTrigger("Win");
                             //SoundManager.instance.PlaySound("win");
                             LevelManagerScript.instance.NextLevel();
                             return true;
                         }else if (tile.gameObject.transform.parent == otherPlayer.GetComponent<PlayerMovement>().targetTile.gameObject.transform.parent && !primary)
                         {
                             MovePlayer(tile);
-                            Instantiate(winParticlePrefab, targetTile.transform.position, targetTile.transform.rotation, null);
+                            if (winParticlePrefab != null)
+                            {
+                                Instantiate(winParticlePrefab, targetTile.transform.position, targetTile.transform.rotation, null);
+                            }
                             //Play the win Animation
-                            turtleAnimator.SetTrigger("Win");
+                            //turtleAnimator.SetTrigger("Win");
                             //SoundManager.instance.PlaySound("win");
                             return true;
                         }

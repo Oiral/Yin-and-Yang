@@ -122,7 +122,7 @@ public class TileConnectionsScript : MonoBehaviour {
         {
             return true;
         }
-        else if (side == TileSide.Bottom && heightDif < 0)
+        else if (side == TileSide.Bottom && heightDif > 0)
         {
             return true;
         }
