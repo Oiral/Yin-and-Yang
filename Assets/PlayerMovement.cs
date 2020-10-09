@@ -18,6 +18,8 @@ public class PlayerMovement : MonoBehaviour {
 
     public bool canMove = true;
 
+    public float moveSpeed = 0.2f;
+
     private void Start()
     {
         startingTile = targetTile;
@@ -27,7 +29,7 @@ public class PlayerMovement : MonoBehaviour {
     private void Update()
     {
         Vector3 targetPos = targetTile.transform.position;
-        transform.position = Vector3.Lerp(transform.position, targetPos, 0.1f);
+        transform.position = Vector3.Lerp(transform.position, targetPos, moveSpeed);
 
     }
 
@@ -131,7 +133,7 @@ public class PlayerMovement : MonoBehaviour {
 
         Quaternion rotation = Quaternion.LookRotation(lookPos);
         rotation = Quaternion.Euler(rotation.eulerAngles + eulerAngleRotOffset);
-        transform.rotation = rotation;
+        //transform.rotation = rotation;
 
         //Play the animation
         //turtleAnimator.SetTrigger("Move");
