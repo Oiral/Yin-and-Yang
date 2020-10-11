@@ -1,16 +1,13 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.Events;
 
 public class PlayerController : MonoBehaviour {
 
     public PlayerMovement selectedMoveScript;
-    public PlayerMovement otherMoveScript;
+    public List<PlayerMovement> keyMoveScripts = new List<PlayerMovement>();
 
     public RotateBoard rotateScript;
-
-    public UnityEvent onMove;
 
     // Update is called once per frame
     void Update () {
@@ -45,8 +42,10 @@ public class PlayerController : MonoBehaviour {
         if (selectedMoveScript.MovePlayer(dir, true))
         {
             //Debug.Log("Move Other Player");
-            otherMoveScript.MovePlayer(dir, false);
-            onMove.Invoke();
+            //keyMoveScripts.MovePlayer(dir, false);
+            moveKeys(dir);
+
+            GetComponent<LevelController>().OnPlayerMove();
         }
     }
 
@@ -69,14 +68,23 @@ public class PlayerController : MonoBehaviour {
         }
     }
 
+    /*
     void FlipSelected()
     {
         PlayerMovement temp = selectedMoveScript;
-        selectedMoveScript = otherMoveScript;
-        otherMoveScript = temp;
+        selectedMoveScript = keyMoveScripts;
+        keyMoveScripts = temp;
 
         onMove.Invoke();
     }
+    */
 
-    
+    void moveKeys(Direction dir)
+    {
+        foreach (PlayerMovement key in keyMoveScripts)
+        {
+            key.MovePlayer(dir, false);
+        }
+    }
+
 }

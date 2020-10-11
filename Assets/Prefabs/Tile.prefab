@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 3648873940650891389}
   m_Layer: 0
   m_Name: Tile
-  m_TagString: Untagged
+  m_TagString: Tile
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -66,7 +66,7 @@ MeshRenderer:
   m_Materials:
   - {fileID: 2100000, guid: 8291bd461663a4ebe9300209b517bf8a, type: 2}
   - {fileID: 2100000, guid: ba6e4eb37fe95432cb4bb97d27660158, type: 2}
-  - {fileID: 2100000, guid: cd94392dfd75e4fb0a064f66a1fb2875, type: 2}
+  - {fileID: 2100000, guid: 8291bd461663a4ebe9300209b517bf8a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -1006,6 +1006,9 @@ MonoBehaviour:
   connections:
   - {fileID: 0}
   - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   side: 1
   distanceCheck: 1.1
 --- !u!1 &3648873941780566743
@@ -1052,6 +1055,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   connections:
+  - {fileID: 0}
+  - {fileID: 0}
+  - {fileID: 0}
   - {fileID: 0}
   - {fileID: 0}
   side: 0

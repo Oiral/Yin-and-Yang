@@ -7,10 +7,11 @@ public class LevelManagerScript : MonoBehaviour {
 
 	public int currentLevel = 0;
 
-    public static LevelManagerScript instance;
+    //public static LevelManagerScript instance;
 
     public float waitTime = 0.7f;
 
+    /*
     private void Start()
     {
         if (instance == null)
@@ -22,6 +23,13 @@ public class LevelManagerScript : MonoBehaviour {
         }
 
         DontDestroyOnLoad(gameObject);
+    }
+    */
+
+    private void Start()
+    {
+
+        currentLevel = SceneManager.GetActiveScene().buildIndex;
     }
 
     public void NextLevel()
@@ -44,17 +52,15 @@ public class LevelManagerScript : MonoBehaviour {
 
     IEnumerator WaitForNextLevel()
     {
-        yield return new WaitForSeconds(waitTime / 4);
-        yield return new WaitForSeconds(waitTime / 4);
-        yield return new WaitForSeconds(waitTime / 4);
+        yield return new WaitForSeconds(waitTime * 0.8f);
         //FindBoard
         if (GameObject.FindGameObjectWithTag("Board") != null)
         {
             RotateBoard board = GameObject.FindGameObjectWithTag("Board").GetComponent<RotateBoard>();
-            board.targetPos = new Vector3(0, -5, 0);
+            board.targetPos = new Vector3(0, -10, 0);
         }
 
-        yield return new WaitForSeconds(waitTime / 4);
+        yield return new WaitForSeconds(waitTime * 0.2f);
 
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(currentLevel += 1);
 
@@ -75,9 +81,9 @@ public class LevelManagerScript : MonoBehaviour {
     {
         currentLevel = 0;
         SceneManager.LoadScene(0);
-        UIScript.instance.SetMainMenu(true);
-        UIScript.instance.SetPauseMenu(false);
-        UIScript.instance.SetWinMenu(false);
+        //UIScript.instance.SetMainMenu(true);
+        //UIScript.instance.SetPauseMenu(false);
+        //UIScript.instance.SetWinMenu(false);
     }
 
     public void Quit()
@@ -89,6 +95,6 @@ public class LevelManagerScript : MonoBehaviour {
     public void Restart()
     {
         SceneManager.LoadScene(currentLevel);
-        UIScript.instance.SetPauseMenu(false);
+        //UIScript.instance.SetPauseMenu(false);
     }
 }

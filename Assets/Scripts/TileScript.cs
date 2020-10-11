@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum TileType { Default,Hole,Goal,Block}
+public enum TileType { Default,Hole,Goal,Block,Ice}
 
 public class TileScript : MonoBehaviour {
     public TileConnectionsScript topPoint;

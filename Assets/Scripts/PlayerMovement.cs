@@ -11,10 +11,14 @@ public class PlayerMovement : MonoBehaviour {
     public float respawnTime = 2;
     public GameObject otherPlayer;
 
+    public TileScript currentTile;
+
     public GameObject splashPrefab;
     public GameObject winParticlePrefab;
 
     public Animator turtleAnimator;
+
+    public LevelManagerScript levelManager;
 
     public bool canMove = true;
 
@@ -23,6 +27,7 @@ public class PlayerMovement : MonoBehaviour {
     private void Start()
     {
         startingTile = targetTile;
+        currentTile = targetTile.GetComponentInParent<TileScript>();
         turtleAnimator = GetComponentInChildren<Animator>();
     }
 
@@ -46,7 +51,7 @@ public class PlayerMovement : MonoBehaviour {
 
             if (CheckDirection(targetTile.transform.position, tile.transform.position) == dir)
             {
-                DisableMovementInput(0.23f);
+                //DisableMovementInput(0.23f);
                 switch (tile.GetComponentInParent<TileScript>().Type)
                 {
                     case TileType.Default:
@@ -67,7 +72,7 @@ public class PlayerMovement : MonoBehaviour {
                             //Play the win Animation
                             //turtleAnimator.SetTrigger("Win");
                             //SoundManager.instance.PlaySound("win");
-                            LevelManagerScript.instance.NextLevel();
+                            levelManager.NextLevel();
                             return true;
                         }else if (tile.gameObject.transform.parent == otherPlayer.GetComponent<PlayerMovement>().targetTile.gameObject.transform.parent && !primary)
                         {
@@ -83,6 +88,10 @@ public class PlayerMovement : MonoBehaviour {
                         }
                         else
                             return false;
+                    case TileType.Ice:
+                        MovePlayer(tile);
+                        MovePlayer(dir, primary);
+                        return true;
                     default:
                         return false;
                 }
@@ -138,6 +147,8 @@ public class PlayerMovement : MonoBehaviour {
         //Play the animation
         //turtleAnimator.SetTrigger("Move");
         //SoundManager.instance.PlaySound("walkSummer");
+
+        currentTile = tile.GetComponentInParent<TileScript>();
     }
 
 
