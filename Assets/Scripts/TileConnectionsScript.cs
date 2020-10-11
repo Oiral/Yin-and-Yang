@@ -14,6 +14,8 @@ public class TileConnectionsScript : MonoBehaviour {
 
     public float distanceCheck = 0.5f;
 
+    public LayerMask layerMask;
+
     private void OnDrawGizmosSelected()
     {
         if (connections.Count > 0)
@@ -40,6 +42,7 @@ public class TileConnectionsScript : MonoBehaviour {
 
     public void UpdateConnections()
     {
+        //Find the nearest conneciton points
         foreach (TileConnectionsScript tileCon in FindObjectsOfType(typeof(TileConnectionsScript)))
         {
             if (tileCon == this)
@@ -96,6 +99,19 @@ public class TileConnectionsScript : MonoBehaviour {
             }
         }
         */
+
+        for (int i = connections.Count - 1; i >= 0; i--)
+        {
+            if (Physics.Linecast(transform.position, connections[i].transform.position, layerMask))
+            {
+                Debug.Log("Something blocked the connection");
+                if (connections[i].connections.Contains(this))
+                {
+                    connections[i].connections.Remove(this);
+                }
+                connections.Remove(connections[i]);
+            }
+        }
     }
 
     bool CheckInHoriRange(TileConnectionsScript myTile, TileConnectionsScript otherTile)

@@ -1006,11 +1006,11 @@ MonoBehaviour:
   connections:
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   side: 1
   distanceCheck: 1.1
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 1024
 --- !u!1 &3648873941780566743
 GameObject:
   m_ObjectHideFlags: 0
@@ -1057,8 +1057,8 @@ MonoBehaviour:
   connections:
   - {fileID: 0}
   - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
-  - {fileID: 0}
   side: 0
   distanceCheck: 1.1
+  layerMask:
+    serializedVersion: 2
+    m_Bits: 1024
