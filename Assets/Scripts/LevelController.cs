@@ -12,6 +12,8 @@ public class LevelController : MonoBehaviour
     public Material goalOpenMat;
     public Material goalClosedMat;
 
+    public bool goalOpen;
+
     private void Start()
     {
         controller = GetComponent<PlayerController>();
@@ -25,7 +27,9 @@ public class LevelController : MonoBehaviour
 
     public void OnPlayerMove()
     {
-        boardManager.ChangeGoalMaterial(CheckAllKeysOnPlayer());
+        goalOpen = CheckAllKeysOnPlayer();
+
+        boardManager.ChangeGoalMaterial(goalOpen);
     }
 
     bool CheckAllKeysOnPlayer()

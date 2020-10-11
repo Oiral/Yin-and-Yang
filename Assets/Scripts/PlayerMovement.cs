@@ -62,7 +62,7 @@ public class PlayerMovement : MonoBehaviour {
                         MovePlayer(tile);
                         return true;
                     case TileType.Goal:
-                        if (targetTile.gameObject.transform.parent == otherPlayer.GetComponent<PlayerMovement>().targetTile.gameObject.transform.parent && primary)
+                        if (FindObjectOfType<LevelController>().goalOpen && primary)
                         {
                             MovePlayer(tile);
                             if (winParticlePrefab != null)
