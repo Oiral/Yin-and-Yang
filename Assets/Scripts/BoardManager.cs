@@ -7,7 +7,7 @@ public class BoardManager : MonoBehaviour
     public List<TileScript> tiles = new List<TileScript>();
 
     public List<TileConnectionsScript> topTileConnections = new List<TileConnectionsScript>();
-    public List<TileConnectionsScript> bottomTileConnections = new List<TileConnectionsScript>();
+    //public List<TileConnectionsScript> bottomTileConnections = new List<TileConnectionsScript>();
 
 
     [ContextMenu("Update Board")]
@@ -18,7 +18,7 @@ public class BoardManager : MonoBehaviour
 
         topTileConnections = new List<TileConnectionsScript>();
 
-        bottomTileConnections = new List<TileConnectionsScript>();
+        //bottomTileConnections = new List<TileConnectionsScript>();
 
 
         foreach (TileScript tile in FindObjectsOfType(typeof(TileScript)))
@@ -27,10 +27,10 @@ public class BoardManager : MonoBehaviour
             tiles.Add(tile);
 
             topTileConnections.Add(tile.topPoint);
-            bottomTileConnections.Add(tile.bottomPoint);
+            //bottomTileConnections.Add(tile.bottomPoint);
 
             tile.topPoint.UpdateConnections();
-            tile.bottomPoint.UpdateConnections();
+            //tile.bottomPoint.UpdateConnections();
 
             ChangeTileMaterial(tile);
         }

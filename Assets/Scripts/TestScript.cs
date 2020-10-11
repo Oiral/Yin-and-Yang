@@ -40,7 +40,7 @@ public class TestScript : MonoBehaviour {
             {
                 GameObject tile = tiles[x, z];
                 TileConnectionsScript topConnectionScript = tile.GetComponent<TileScript>().topPoint;
-                TileConnectionsScript bottomConnectionScript = tile.GetComponent<TileScript>().bottomPoint;
+                //TileConnectionsScript bottomConnectionScript = tile.GetComponent<TileScript>().bottomPoint;
                 for (int i = 0; i < 4; i++)
                 {
                     int[] mod = directionMap[(Direction)i];
@@ -48,7 +48,7 @@ public class TestScript : MonoBehaviour {
                     if (((newTile[0] < 0 || newTile[0] >= xAmount) || (newTile[1] < 0 || newTile[1] >= zAmount)) == false)
                     {
                         topConnectionScript.connections.Add((tiles[newTile[0],newTile[1]]).GetComponent<TileScript>().topPoint);
-                        bottomConnectionScript.connections.Add((tiles[newTile[0], newTile[1]]).GetComponent<TileScript>().bottomPoint);
+                        //bottomConnectionScript.connections.Add((tiles[newTile[0], newTile[1]]).GetComponent<TileScript>().bottomPoint);
                     }
 
                 }

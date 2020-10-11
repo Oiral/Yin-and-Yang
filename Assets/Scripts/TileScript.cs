@@ -6,7 +6,7 @@ public enum TileType { Default,Hole,Goal,Block,Ice}
 
 public class TileScript : MonoBehaviour {
     public TileConnectionsScript topPoint;
-    public TileConnectionsScript bottomPoint;
+    //public TileConnectionsScript bottomPoint;
 
     public TileType Type = TileType.Default;
 

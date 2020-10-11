@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum TileSide {Top, Bottom };
+//public enum TileSide {Top, Bottom };
 
 public class TileConnectionsScript : MonoBehaviour {
 
@@ -10,7 +10,7 @@ public class TileConnectionsScript : MonoBehaviour {
 
     public List<TileConnectionsScript> connections = new List<TileConnectionsScript>();
 
-    public TileSide side = TileSide.Top;
+    //public TileSide side = TileSide.Top;
 
     public float distanceCheck = 0.5f;
 
@@ -48,8 +48,6 @@ public class TileConnectionsScript : MonoBehaviour {
             if (tileCon == this)
                 continue;
             if (connections.Contains(tileCon))
-                continue;
-            if (tileCon.side != side)
                 continue;
 
             if (Vector3.Distance(tileCon.gameObject.transform.position, this.transform.position) > distanceCheck)
@@ -134,11 +132,7 @@ public class TileConnectionsScript : MonoBehaviour {
 
         float heightDif = myPos.y - theirPos.y;
 
-        if (side == TileSide.Top && heightDif > 0)
-        {
-            return true;
-        }
-        else if (side == TileSide.Bottom && heightDif > 0)
+        if (heightDif > 0)
         {
             return true;
         }

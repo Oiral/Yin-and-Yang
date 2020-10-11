@@ -216,7 +216,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-140048
+  m_Name: pb_Mesh-220438
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -553,7 +553,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-140014
+  m_Name: pb_Mesh-220402
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -717,7 +717,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-140050
+  m_Name: pb_Mesh-220440
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1085,7 +1085,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-140046
+  m_Name: pb_Mesh-220436
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -1340,6 +1340,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1204797092}
+    - target: {fileID: 1157581255458462759, guid: d62c69f804fdf4610a521389633d697a, type: 3}
+      propertyPath: targetTile
+      value: 
+      objectReference: {fileID: 1157581255419061634}
     - target: {fileID: 1362838393023188395, guid: d62c69f804fdf4610a521389633d697a, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -1352,6 +1356,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1657100005}
+    - target: {fileID: 2500598956431883685, guid: d62c69f804fdf4610a521389633d697a, type: 3}
+      propertyPath: m_Name
+      value: Key Start
+      objectReference: {fileID: 0}
     - target: {fileID: 2500598956586477263, guid: d62c69f804fdf4610a521389633d697a, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -1360,6 +1368,10 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1661128495}
+    - target: {fileID: 2500598957782437208, guid: d62c69f804fdf4610a521389633d697a, type: 3}
+      propertyPath: m_Name
+      value: Goal
+      objectReference: {fileID: 0}
     - target: {fileID: 2500598957782437209, guid: d62c69f804fdf4610a521389633d697a, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -1368,10 +1380,26 @@ PrefabInstance:
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 139859369}
+    - target: {fileID: 2500598957844174488, guid: d62c69f804fdf4610a521389633d697a, type: 3}
+      propertyPath: m_Name
+      value: Player Start
+      objectReference: {fileID: 0}
     - target: {fileID: 2500598957844174489, guid: d62c69f804fdf4610a521389633d697a, type: 3}
       propertyPath: m_Mesh
       value: 
       objectReference: {fileID: 1208438189}
+    - target: {fileID: 2500598957844174490, guid: d62c69f804fdf4610a521389633d697a, type: 3}
+      propertyPath: m_SelectedFaces.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2500598957844174490, guid: d62c69f804fdf4610a521389633d697a, type: 3}
+      propertyPath: m_SelectedEdges.Array.size
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2500598957844174490, guid: d62c69f804fdf4610a521389633d697a, type: 3}
+      propertyPath: m_SelectedVertices.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2500598957844174500, guid: d62c69f804fdf4610a521389633d697a, type: 3}
       propertyPath: m_Mesh
       value: 
@@ -1426,6 +1454,17 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d62c69f804fdf4610a521389633d697a, type: 3}
+--- !u!114 &1157581255419061634 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 2500598957432518451, guid: d62c69f804fdf4610a521389633d697a, type: 3}
+  m_PrefabInstance: {fileID: 1157581255419061633}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3d64a812cd497994c95d65c42a461c0e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1001 &2315653481456504840
 PrefabInstance:
   m_ObjectHideFlags: 0
