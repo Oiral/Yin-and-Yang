@@ -50,18 +50,30 @@ public class TileConnectionsScript : MonoBehaviour {
             if (connections.Contains(tileCon))
                 continue;
 
-            if (Vector3.Distance(tileCon.gameObject.transform.position, this.transform.position) > distanceCheck)
+            switch (GetComponentInParent<TileScript>().Type)
             {
-                //If the tile is not in the correct distance
-                if (CheckInHoriRange(this, tileCon) && CheckInVertRange(this, tileCon))
-                {
+                case TileType.Jelly:
                     connections.Add(tileCon);
-                }
-                continue;
+                    tileCon.connections.Add(this);
+                    break;
+
+                default:
+                    if (Vector3.Distance(tileCon.gameObject.transform.position, this.transform.position) > distanceCheck)
+                    {
+                        //If the tile is not in the correct distance
+                        if (CheckInHoriRange(this, tileCon) && CheckInVertRange(this, tileCon))
+                        {
+                            connections.Add(tileCon);
+                        }
+                        continue;
+                    }
+
+                    connections.Add(tileCon);
+                    tileCon.connections.Add(this);
+
+                    break;
             }
 
-            connections.Add(tileCon);
-            tileCon.connections.Add(this);
         }
 
         for (int i = connections.Count-1; i >= 0; i--)
@@ -71,19 +83,41 @@ public class TileConnectionsScript : MonoBehaviour {
                 connections.RemoveAt(i);
                 continue;
             }
-
-            if (Vector3.Distance(connections[i].gameObject.transform.position, this.transform.position) > distanceCheck)
+            switch (connections[i].GetComponentInParent<TileScript>().Type)
             {
-                if (CheckInHoriRange(this, connections[i]) && CheckInVertRange(this, connections[i]))
-                {
-                    continue;
-                }
+                case TileType.Jelly:
+                    //If it is jelly, we don't want to remove it due to height differences
+                    break;
 
+                default:
+                    //Remove conneciton if piece is higher and should ne be moved to
+                    if (Vector3.Distance(connections[i].gameObject.transform.position, this.transform.position) > distanceCheck)
+                    {
+                        if (CheckInHoriRange(this, connections[i]) && CheckInVertRange(this, connections[i]))
+                        {
+                            continue;
+                        }
+
+                        if (connections[i].connections.Contains(this))
+                        {
+                            connections[i].connections.Remove(this);
+                        }
+                        connections.Remove(connections[i]);
+                        continue;
+                    }
+                    break;
+            }
+
+            //Ray cast to see if there is a barrier in the way of this connection
+            if (Physics.Linecast(transform.position, connections[i].transform.position, layerMask))
+            {
+                Debug.Log("Something blocked the connection");
                 if (connections[i].connections.Contains(this))
                 {
                     connections[i].connections.Remove(this);
                 }
                 connections.Remove(connections[i]);
+                continue;
             }
         }
 
@@ -97,19 +131,6 @@ public class TileConnectionsScript : MonoBehaviour {
             }
         }
         */
-
-        for (int i = connections.Count - 1; i >= 0; i--)
-        {
-            if (Physics.Linecast(transform.position, connections[i].transform.position, layerMask))
-            {
-                Debug.Log("Something blocked the connection");
-                if (connections[i].connections.Contains(this))
-                {
-                    connections[i].connections.Remove(this);
-                }
-                connections.Remove(connections[i]);
-            }
-        }
     }
 
     bool CheckInHoriRange(TileConnectionsScript myTile, TileConnectionsScript otherTile)

@@ -57,10 +57,12 @@ public class PlayerMovement : MonoBehaviour {
                     case TileType.Default:
                         MovePlayer(tile);
                         return true;
+
                     case TileType.Hole:
                         StartCoroutine(Respawn());
                         MovePlayer(tile);
                         return true;
+
                     case TileType.Goal:
                         if (FindObjectOfType<LevelController>().goalOpen && primary)
                         {
@@ -88,10 +90,23 @@ public class PlayerMovement : MonoBehaviour {
                         }
                         else
                             return false;
+
                     case TileType.Ice:
                         MovePlayer(tile);
                         MovePlayer(dir, primary);
                         return true;
+
+                    case TileType.Jelly:
+                        if (currentTile.transform.position.y < tile.transform.position.y)
+                        {
+                            return true;
+                        }
+                        else
+                        {
+                            MovePlayer(tile);
+                            return true;
+                        }
+
                     default:
                         return false;
                 }
