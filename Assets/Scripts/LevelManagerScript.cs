@@ -9,7 +9,7 @@ public class LevelManagerScript : MonoBehaviour {
 
     //public static LevelManagerScript instance;
 
-    public float waitTime = 0.7f;
+    public float waitTime = 2f;
 
     /*
     private void Start()
@@ -59,6 +59,8 @@ public class LevelManagerScript : MonoBehaviour {
             RotateBoard board = GameObject.FindGameObjectWithTag("Board").GetComponent<RotateBoard>();
             board.targetPos = new Vector3(0, -10, 0);
         }
+
+
 
         yield return new WaitForSeconds(waitTime * 0.2f);
 

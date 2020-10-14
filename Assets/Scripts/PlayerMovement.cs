@@ -28,7 +28,7 @@ public class PlayerMovement : MonoBehaviour {
     {
         startingTile = targetTile;
         currentTile = targetTile.GetComponentInParent<TileScript>();
-        turtleAnimator = GetComponentInChildren<Animator>();
+        //turtleAnimator = GetComponentInChildren<Animator>();
     }
 
     private void Update()
@@ -45,10 +45,9 @@ public class PlayerMovement : MonoBehaviour {
             return false;
         }
         //targetTile.UpdateConnections();
-
         foreach (TileConnectionsScript tile in targetTile.connections)
         {
-
+            
             if (CheckDirection(targetTile.transform.position, tile.transform.position) == dir)
             {
                 //DisableMovementInput(0.23f);
@@ -76,7 +75,8 @@ public class PlayerMovement : MonoBehaviour {
                             //SoundManager.instance.PlaySound("win");
                             levelManager.NextLevel();
                             return true;
-                        }else if (tile.gameObject.transform.parent == otherPlayer.GetComponent<PlayerMovement>().targetTile.gameObject.transform.parent && !primary)
+                        }
+                        else if (tile.gameObject.transform.parent == otherPlayer.GetComponent<PlayerMovement>().targetTile.gameObject.transform.parent && !primary)
                         {
                             MovePlayer(tile);
                             if (winParticlePrefab != null)
@@ -89,7 +89,11 @@ public class PlayerMovement : MonoBehaviour {
                             return true;
                         }
                         else
+                        {
+                            lookAtConnection(dir);
+                            Animate("Attempt");
                             return false;
+                        }
 
                     case TileType.Ice:
                         MovePlayer(tile);
@@ -97,8 +101,10 @@ public class PlayerMovement : MonoBehaviour {
                         return true;
 
                     case TileType.Jelly:
-                        if (currentTile.transform.position.y < tile.transform.position.y)
+                        if (targetTile.transform.position.y < tile.transform.position.y)
                         {
+                            lookAtConnection(tile);
+                            Animate("Denied");
                             return true;
                         }
                         else
@@ -108,10 +114,16 @@ public class PlayerMovement : MonoBehaviour {
                         }
 
                     default:
+                        lookAtConnection(dir);
+                        Animate("Attempt");
                         return false;
                 }
             }
         }
+
+        //If we cannot move
+        lookAtConnection(dir);
+        Animate("Attempt");
         return false;
     }
     
@@ -146,26 +158,36 @@ public class PlayerMovement : MonoBehaviour {
 
         Quaternion rotation = Quaternion.LookRotation(lookPos) * BoardRotation;
         //transform.rotation = rotation;*/
-        Vector3 lookPos = targetTile.transform.position - transform.position;
-        lookPos.y = 0;
-
-        Quaternion BoardRotation = GameObject.FindGameObjectWithTag("Board").transform.rotation;
-
-        //Holy Jesus Rotation Magic
-        Vector3 eulerAngleRotOffset = new Vector3(BoardRotation.eulerAngles.z, BoardRotation.eulerAngles.y, BoardRotation.eulerAngles.x);
 
 
-        Quaternion rotation = Quaternion.LookRotation(lookPos);
-        rotation = Quaternion.Euler(rotation.eulerAngles + eulerAngleRotOffset);
-        //transform.rotation = rotation;
+        lookAtConnection(tile);
 
         //Play the animation
-        //turtleAnimator.SetTrigger("Move");
+        Animate("Move");
         //SoundManager.instance.PlaySound("walkSummer");
 
         currentTile = tile.GetComponentInParent<TileScript>();
     }
 
+    void lookAtConnection(TileConnectionsScript tile)
+    {
+        Vector3 lookPos = tile.transform.position - transform.position;
+        lookPos.y = 0;
+
+        Quaternion rotation = Quaternion.LookRotation(lookPos);
+        transform.rotation = rotation;
+    }
+
+    void lookAtConnection(Direction dir)
+    {
+        Vector3 offset = VectorFromDir(dir);
+
+        Vector3 lookPos = transform.position + offset;
+        lookPos.y = 0;
+
+        Quaternion rotation = Quaternion.LookRotation(lookPos);
+        transform.rotation = rotation;
+    }
 
     private Direction CheckDirection(Vector3 startingPos, Vector3 checkingPos)
     {
@@ -189,6 +211,35 @@ public class PlayerMovement : MonoBehaviour {
             return Direction.North;
         } 
             
+    }
+
+    private Vector3 VectorFromDir(Direction dir)
+    {
+        Vector3 vector = Vector3.zero;
+
+        switch (dir)
+        {
+            case Direction.North:
+                return Vector3.forward;
+
+            case Direction.South:
+                return Vector3.back;
+
+            case Direction.East:
+                return Vector3.right;
+
+            case Direction.West:
+                return Vector3.left;
+        }
+        return vector;
+    }
+
+    void Animate(string movement)
+    {
+        if (turtleAnimator != null)
+        {
+            turtleAnimator.SetTrigger(movement);
+        }
     }
 
     IEnumerator Respawn()

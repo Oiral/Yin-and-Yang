@@ -20,6 +20,7 @@ public class RotateBoard : MonoBehaviour {
     {
         cRI = 0;
         //backGroundMaterial.SetFloat("_DayNight", cRI);
+        transform.position += Vector3.up * 10;
     }
 
     private void OnDrawGizmos()

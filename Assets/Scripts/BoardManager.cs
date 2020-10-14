@@ -62,6 +62,7 @@ public class BoardManager : MonoBehaviour
     public Material normalMaterial;
     public Material goalClosedMaterial;
     public Material goalOpenMaterial;
+    public Material jellyMaterial;
 
     public void ChangeGoalMaterial(bool isOpen)
     {
@@ -93,6 +94,22 @@ public class BoardManager : MonoBehaviour
         Material[] rendererMats = tile.GetComponent<MeshRenderer>().sharedMaterials;
 
         rendererMats[0] = materialToChangeTo;
+        rendererMats[1] = normalMaterial;
+
+        tile.GetComponent<MeshRenderer>().sharedMaterials = rendererMats;
+    }
+
+    public void ChangeTileMaterial(TileScript tile, Material materialToChangeTo, Material secondaryMaterial)
+    {
+        if (tile.GetComponent<MeshRenderer>().sharedMaterials[0] == materialToChangeTo)
+        {
+            return;
+        }
+
+        Material[] rendererMats = tile.GetComponent<MeshRenderer>().sharedMaterials;
+
+        rendererMats[0] = materialToChangeTo;
+        rendererMats[2] = secondaryMaterial;
 
         tile.GetComponent<MeshRenderer>().sharedMaterials = rendererMats;
     }
@@ -109,9 +126,14 @@ public class BoardManager : MonoBehaviour
                 ChangeGoalMaterial(false);
                 break;
 
+            case TileType.Jelly:
+                ChangeTileMaterial(tile, jellyMaterial, jellyMaterial);
+                break;
+
             default:
                 ChangeTileMaterial(tile, normalMaterial);
                 break;
+
         }
     }
 }
