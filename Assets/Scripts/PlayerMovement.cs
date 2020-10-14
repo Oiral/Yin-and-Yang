@@ -90,7 +90,7 @@ public class PlayerMovement : MonoBehaviour {
                         }
                         else
                         {
-                            lookAtConnection(dir);
+                            LookAtConnection(dir);
                             Animate("Attempt");
                             return false;
                         }
@@ -103,7 +103,7 @@ public class PlayerMovement : MonoBehaviour {
                     case TileType.Jelly:
                         if (targetTile.transform.position.y < tile.transform.position.y)
                         {
-                            lookAtConnection(tile);
+                            LookAtConnection(tile);
                             Animate("Denied");
                             return true;
                         }
@@ -114,7 +114,7 @@ public class PlayerMovement : MonoBehaviour {
                         }
 
                     default:
-                        lookAtConnection(dir);
+                        LookAtConnection(dir);
                         Animate("Attempt");
                         return false;
                 }
@@ -122,7 +122,7 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         //If we cannot move
-        lookAtConnection(dir);
+        LookAtConnection(dir);
         Animate("Attempt");
         return false;
     }
@@ -160,7 +160,7 @@ public class PlayerMovement : MonoBehaviour {
         //transform.rotation = rotation;*/
 
 
-        lookAtConnection(tile);
+        LookAtConnection(tile);
 
         //Play the animation
         Animate("Move");
@@ -169,7 +169,7 @@ public class PlayerMovement : MonoBehaviour {
         currentTile = tile.GetComponentInParent<TileScript>();
     }
 
-    void lookAtConnection(TileConnectionsScript tile)
+    void LookAtConnection(TileConnectionsScript tile)
     {
         Vector3 lookPos = tile.transform.position - transform.position;
         lookPos.y = 0;
@@ -178,15 +178,13 @@ public class PlayerMovement : MonoBehaviour {
         transform.rotation = rotation;
     }
 
-    void lookAtConnection(Direction dir)
+    void LookAtConnection(Direction dir)
     {
         Vector3 offset = VectorFromDir(dir);
 
         Vector3 lookPos = transform.position + offset;
-        lookPos.y = 0;
 
-        Quaternion rotation = Quaternion.LookRotation(lookPos);
-        transform.rotation = rotation;
+        transform.LookAt(lookPos,Vector3.up);
     }
 
     private Direction CheckDirection(Vector3 startingPos, Vector3 checkingPos)

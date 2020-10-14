@@ -93,7 +93,7 @@ public class TileConnectionsScript : MonoBehaviour {
                 {
                     case TileType.Jelly:
                         //If it is jelly, we don't want to remove it
-                        continue;
+                        break;
 
                     default:
                         if (CheckInVertRange(this, connections[i]) == false)
