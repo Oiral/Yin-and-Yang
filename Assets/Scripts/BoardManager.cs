@@ -86,17 +86,17 @@ public class BoardManager : MonoBehaviour
 
     public void ChangeTileMaterial (TileScript tile, Material materialToChangeTo)
     {
-        if (tile.GetComponent<MeshRenderer>().sharedMaterials[0] == materialToChangeTo)
+        if (tile.visual.GetComponent<MeshRenderer>().sharedMaterials[0] == materialToChangeTo)
         {
             return;
         }
 
-        Material[] rendererMats = tile.GetComponent<MeshRenderer>().sharedMaterials;
+        Material[] rendererMats = tile.visual.GetComponent<MeshRenderer>().sharedMaterials;
 
         rendererMats[0] = materialToChangeTo;
         rendererMats[1] = normalMaterial;
 
-        tile.GetComponent<MeshRenderer>().sharedMaterials = rendererMats;
+        tile.visual.GetComponent<MeshRenderer>().sharedMaterials = rendererMats;
     }
 
     public void ChangeTileMaterial(TileScript tile, Material materialToChangeTo, Material secondaryMaterial)
@@ -106,12 +106,12 @@ public class BoardManager : MonoBehaviour
             return;
         }
 
-        Material[] rendererMats = tile.GetComponent<MeshRenderer>().sharedMaterials;
+        Material[] rendererMats = tile.visual.GetComponent<MeshRenderer>().sharedMaterials;
 
         rendererMats[0] = materialToChangeTo;
         rendererMats[2] = secondaryMaterial;
 
-        tile.GetComponent<MeshRenderer>().sharedMaterials = rendererMats;
+        tile.visual.GetComponent<MeshRenderer>().sharedMaterials = rendererMats;
     }
 
     public void ChangeTileMaterial(TileScript tile)
@@ -135,5 +135,10 @@ public class BoardManager : MonoBehaviour
                 break;
 
         }
+    }
+
+    public void UpdateBoardVisuals()
+    {
+
     }
 }

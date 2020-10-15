@@ -28,7 +28,6 @@ public class LevelManagerScript : MonoBehaviour {
 
     private void Start()
     {
-
         currentLevel = SceneManager.GetActiveScene().buildIndex;
     }
 
@@ -86,6 +85,11 @@ public class LevelManagerScript : MonoBehaviour {
         //UIScript.instance.SetMainMenu(true);
         //UIScript.instance.SetPauseMenu(false);
         //UIScript.instance.SetWinMenu(false);
+    }
+
+    public void LoadLevel(int num)
+    {
+        SceneManager.LoadScene(num);
     }
 
     public void Quit()

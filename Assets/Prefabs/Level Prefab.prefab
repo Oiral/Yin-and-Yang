@@ -207,7 +207,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTile: {fileID: 2500598956982803470}
-  respawnTime: 2
+  respawnTime: 0.5
   otherPlayer: {fileID: 1157581255458462756}
   currentTile: {fileID: 0}
   splashPrefab: {fileID: 0}
@@ -216,6 +216,7 @@ MonoBehaviour:
   levelManager: {fileID: 1157581254605606673}
   canMove: 1
   moveSpeed: 0.2
+  respawnIsRunning: 0
 --- !u!95 &1157581255419061635
 Animator:
   serializedVersion: 3
@@ -359,7 +360,7 @@ GameObject:
   - component: {fileID: 223422519052308921}
   m_Layer: 0
   m_Name: Manager
-  m_TagString: Untagged
+  m_TagString: GameController
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -629,7 +630,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   targetTile: {fileID: 2500598957432518451}
-  respawnTime: 2
+  respawnTime: 0.5
   otherPlayer: {fileID: 1157581254342649356}
   currentTile: {fileID: 0}
   splashPrefab: {fileID: 0}
@@ -638,6 +639,7 @@ MonoBehaviour:
   levelManager: {fileID: 0}
   canMove: 1
   moveSpeed: 0.2
+  respawnIsRunning: 0
 --- !u!1 &1481780184456593497
 GameObject:
   m_ObjectHideFlags: 0
@@ -13911,6 +13913,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1157581254586342276}
     m_Modifications:
+    - target: {fileID: 3147386078840574617, guid: 5af19d9c5e49041aea697ed1c4e19421,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3648873940650891328, guid: 5af19d9c5e49041aea697ed1c4e19421,
         type: 3}
       propertyPath: m_Materials.Array.data[2]
@@ -14034,7 +14041,7 @@ PrefabInstance:
     - target: {fileID: 3648873941780566741, guid: 5af19d9c5e49041aea697ed1c4e19421,
         type: 3}
       propertyPath: connections.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3648873941780566741, guid: 5af19d9c5e49041aea697ed1c4e19421,
         type: 3}
@@ -14110,6 +14117,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1157581254586342276}
     m_Modifications:
+    - target: {fileID: 3147386078840574617, guid: 5af19d9c5e49041aea697ed1c4e19421,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3648873940650891328, guid: 5af19d9c5e49041aea697ed1c4e19421,
         type: 3}
       propertyPath: m_SelectedEditorRenderState
@@ -14274,6 +14286,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1157581254586342276}
     m_Modifications:
+    - target: {fileID: 3147386078840574617, guid: 5af19d9c5e49041aea697ed1c4e19421,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3648873940650891328, guid: 5af19d9c5e49041aea697ed1c4e19421,
         type: 3}
       propertyPath: m_Materials.Array.data[2]
@@ -14402,7 +14419,7 @@ PrefabInstance:
     - target: {fileID: 3648873941780566741, guid: 5af19d9c5e49041aea697ed1c4e19421,
         type: 3}
       propertyPath: connections.Array.size
-      value: 1
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3648873941780566741, guid: 5af19d9c5e49041aea697ed1c4e19421,
         type: 3}
@@ -14458,6 +14475,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1157581254586342276}
     m_Modifications:
+    - target: {fileID: 3147386078840574617, guid: 5af19d9c5e49041aea697ed1c4e19421,
+        type: 3}
+      propertyPath: m_Mesh
+      value: 
+      objectReference: {fileID: 0}
     - target: {fileID: 3648873940650891328, guid: 5af19d9c5e49041aea697ed1c4e19421,
         type: 3}
       propertyPath: m_Materials.Array.data[2]
@@ -14576,7 +14598,7 @@ PrefabInstance:
     - target: {fileID: 3648873941780566741, guid: 5af19d9c5e49041aea697ed1c4e19421,
         type: 3}
       propertyPath: connections.Array.size
-      value: 1
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 3648873941780566741, guid: 5af19d9c5e49041aea697ed1c4e19421,
         type: 3}

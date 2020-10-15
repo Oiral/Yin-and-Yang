@@ -24,6 +24,8 @@ public class PlayerMovement : MonoBehaviour {
 
     public float moveSpeed = 0.2f;
 
+    public bool respawnIsRunning;
+
     private void Start()
     {
         startingTile = targetTile;
@@ -44,6 +46,12 @@ public class PlayerMovement : MonoBehaviour {
         {
             return false;
         }
+
+        if (respawnIsRunning)
+        {
+            return false;
+        }
+
         //targetTile.UpdateConnections();
         foreach (TileConnectionsScript tile in targetTile.connections)
         {
@@ -57,9 +65,9 @@ public class PlayerMovement : MonoBehaviour {
                         MovePlayer(tile);
                         return true;
 
-                    case TileType.Hole:
-                        StartCoroutine(Respawn());
+                    case TileType.Teleport:
                         MovePlayer(tile);
+                        StartCoroutine(Respawn());
                         return true;
 
                     case TileType.Goal:
@@ -242,14 +250,24 @@ public class PlayerMovement : MonoBehaviour {
 
     IEnumerator Respawn()
     {
+
+        respawnIsRunning = true;
+
         yield return new WaitForSeconds(0.2f);
 
         //Spawn respawn Particle
-        Instantiate(splashPrefab, targetTile.transform.position, transform.rotation, null);
+        //Instantiate(splashPrefab, targetTile.transform.position, transform.rotation, null);
         //SoundManager.instance.PlaySound("holeFall");
 
+        Animate("Teleport");
+
         yield return new WaitForSeconds(respawnTime);
+        currentTile = startingTile.GetComponentInParent<TileScript>();
         targetTile = startingTile;
+        transform.position = startingTile.transform.position;
+        GameObject.FindWithTag("GameController").GetComponent<LevelController>().OnPlayerMove();
+        respawnIsRunning = false;
+
     }
 
     public void DisableMovementInputOnRotation(float time)
