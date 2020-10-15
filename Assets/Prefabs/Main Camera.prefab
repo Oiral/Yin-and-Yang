@@ -9,7 +9,6 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2315653481848225148}
-  - component: {fileID: 2315653481848225146}
   - component: {fileID: 2465581734009807013}
   m_Layer: 0
   m_Name: Main Camera
@@ -33,14 +32,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 45, y: 30, z: 0}
---- !u!81 &2315653481848225146
-AudioListener:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2315653481848225145}
-  m_Enabled: 1
 --- !u!114 &2465581734009807013
 MonoBehaviour:
   m_ObjectHideFlags: 0

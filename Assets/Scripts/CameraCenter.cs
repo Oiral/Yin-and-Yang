@@ -7,6 +7,7 @@ public class CameraCenter : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        //Debug.LogError("Stopping first");
         BoardManager manager = GameObject.FindWithTag("Board").GetComponent<BoardManager>();
         //Target Position
         float averageY = 0f;
@@ -21,29 +22,29 @@ public class CameraCenter : MonoBehaviour
 
         foreach (TileScript item in manager.tiles)
         {
-            if (item.transform.position.x > maxX)
+            if (item.transform.localPosition.x > maxX)
             {
-                maxX = item.transform.position.x;
+                maxX = item.transform.localPosition.x;
             }
-            if (item.transform.position.x < minX)
+            if (item.transform.localPosition.x < minX)
             {
-                minX = item.transform.position.x;
+                minX = item.transform.localPosition.x;
             }
-            if (item.transform.position.z > maxZ)
+            if (item.transform.localPosition.z > maxZ)
             {
-                maxZ = item.transform.position.z;
+                maxZ = item.transform.localPosition.z;
             }
-            if (item.transform.position.z < minZ)
+            if (item.transform.localPosition.z < minZ)
             {
-                minZ = item.transform.position.z;
+                minZ = item.transform.localPosition.z;
             }
 
-            averageY += item.transform.position.y;
+            averageY += item.transform.localPosition.y;
         }
 
         averageY /= manager.tiles.Count;
 
-        transform.position = new Vector3((maxX + minX) / 2, (maxZ + minZ) / 2, averageY);
+        transform.position = new Vector3((maxX + minX) / 2, averageY, (maxZ + minZ) / 2);
 
     }
 }
