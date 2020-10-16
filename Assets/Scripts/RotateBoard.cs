@@ -7,28 +7,30 @@ using UnityEngine.SceneManagement;
 
 public class RotateBoard : MonoBehaviour {
 
-    public AnimationCurve rotationColourCurve;
+    //public AnimationCurve rotationColourCurve;
     public Vector3 targetPos = new Vector3(0,0,0);
-    public Material backGroundMaterial;
-    public Button rotateButton;
-    public float waitTime = 1;
-    [Range(10, 50)]
-    public float framesOfRotation = 10;
+    //public Material backGroundMaterial;
+    //public Button rotateButton;
+    //public float waitTime = 1;
+    //[Range(10, 50)]
+    //public float framesOfRotation = 10;
 
-    float cRI;
+    //float cRI;
     private void Start()
     {
-        cRI = 0;
+        //cRI = 0;
         //backGroundMaterial.SetFloat("_DayNight", cRI);
-        transform.position += Vector3.up * 10;
+        transform.position -= Vector3.up * 15;
     }
 
+    /*
     private void OnDrawGizmos()
     {
         Gizmos.color = Color.white;
         Gizmos.DrawWireSphere(transform.position, 0.5f);
     }
 
+    
     public void BeginRotation()
     {
         print("StartedRotation");
@@ -70,9 +72,14 @@ public class RotateBoard : MonoBehaviour {
         yield return new WaitForSeconds(1.5f);
         rotateButton.interactable = true;
     }
+    */
 
     private void Update()
     {
         transform.position = Vector3.Lerp(transform.position, targetPos, 0.1f);
+        if (Vector3.Distance(transform.position, targetPos) < 0.02f)
+        {
+            transform.position = targetPos;
+        }
     }
 }

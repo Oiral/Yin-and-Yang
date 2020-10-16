@@ -9,9 +9,6 @@ public class LevelController : MonoBehaviour
 
     public BoardManager boardManager;
 
-    public Material goalOpenMat;
-    public Material goalClosedMat;
-
     public bool goalOpen;
 
     private void Start()

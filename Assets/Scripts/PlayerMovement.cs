@@ -100,6 +100,7 @@ public class PlayerMovement : MonoBehaviour {
                         {
                             LookAtConnection(dir);
                             Animate("Attempt");
+                            PlaySound("Not Move");
                             return false;
                         }
 
@@ -113,6 +114,7 @@ public class PlayerMovement : MonoBehaviour {
                         {
                             LookAtConnection(tile);
                             Animate("Denied");
+                            PlaySound("Slime");
                             return true;
                         }
                         else
@@ -124,6 +126,7 @@ public class PlayerMovement : MonoBehaviour {
                     default:
                         LookAtConnection(dir);
                         Animate("Attempt");
+                        PlaySound("Not Move");
                         return false;
                 }
             }
@@ -132,6 +135,7 @@ public class PlayerMovement : MonoBehaviour {
         //If we cannot move
         LookAtConnection(dir);
         Animate("Attempt");
+        PlaySound("Not Move");
         return false;
     }
     
@@ -172,6 +176,7 @@ public class PlayerMovement : MonoBehaviour {
 
         //Play the animation
         Animate("Move");
+        PlaySound("Move");
         //SoundManager.instance.PlaySound("walkSummer");
 
         currentTile = tile.GetComponentInParent<TileScript>();
@@ -260,6 +265,7 @@ public class PlayerMovement : MonoBehaviour {
         //SoundManager.instance.PlaySound("holeFall");
 
         Animate("Teleport");
+        PlaySound("Teleport");
 
         yield return new WaitForSeconds(respawnTime);
         currentTile = startingTile.GetComponentInParent<TileScript>();
@@ -285,5 +291,13 @@ public class PlayerMovement : MonoBehaviour {
     {
         yield return new WaitForSeconds(time);
         canMove = true;
+    }
+
+    void PlaySound(string soundName)
+    {
+        if (AudioManager.instance != null)
+        {
+            AudioManager.instance.PlaySound(soundName);
+        }
     }
 }

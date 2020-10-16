@@ -56,7 +56,7 @@ public class LevelManagerScript : MonoBehaviour {
         if (GameObject.FindGameObjectWithTag("Board") != null)
         {
             RotateBoard board = GameObject.FindGameObjectWithTag("Board").GetComponent<RotateBoard>();
-            board.targetPos = new Vector3(0, -10, 0);
+            board.targetPos = new Vector3(0, 15, 0);
         }
 
 
