@@ -22,21 +22,21 @@ public class CameraCenter : MonoBehaviour
 
         foreach (TileScript item in manager.tiles)
         {
-            if (item.transform.localPosition.x > maxX)
+            if (item.transform.position.x > maxX)
             {
-                maxX = item.transform.localPosition.x;
+                maxX = item.transform.position.x;
             }
-            if (item.transform.localPosition.x < minX)
+            if (item.transform.position.x < minX)
             {
-                minX = item.transform.localPosition.x;
+                minX = item.transform.position.x;
             }
-            if (item.transform.localPosition.z > maxZ)
+            if (item.transform.position.z > maxZ)
             {
-                maxZ = item.transform.localPosition.z;
+                maxZ = item.transform.position.z;
             }
-            if (item.transform.localPosition.z < minZ)
+            if (item.transform.position.z < minZ)
             {
-                minZ = item.transform.localPosition.z;
+                minZ = item.transform.position.z;
             }
 
             averageY += item.transform.localPosition.y;

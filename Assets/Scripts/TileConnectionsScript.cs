@@ -31,6 +31,19 @@ public class TileConnectionsScript : MonoBehaviour {
             }
         }
 
+        //Lock to int values for x and z
+        //lock to o.25 values for y
+
+        /*
+        Vector3 pos = transform.parent.position;
+
+        pos.x = Mathf.Round(pos.x);
+        pos.z = Mathf.Round(pos.z);
+        pos.y = Mathf.Round(pos.y * 4f) / 4f;
+
+        transform.parent.position = pos;
+        */       
+
         UpdateConnections();
     }
 
@@ -50,29 +63,35 @@ public class TileConnectionsScript : MonoBehaviour {
             if (connections.Contains(tileCon))
                 continue;
 
-            switch (GetComponentInParent<TileScript>().Type)
-            {
-                case TileType.Jelly:
-                    connections.Add(tileCon);
-                    tileCon.connections.Add(this);
-                    break;
 
-                default:
-                    if (Vector3.Distance(tileCon.gameObject.transform.position, this.transform.position) > distanceCheck)
-                    {
-                        //If the tile is not in the correct distance
-                        if (CheckInHoriRange(this, tileCon) && CheckInVertRange(this, tileCon))
+
+
+            if (CheckInHoriRange(this, tileCon))
+            {
+                //Only run this switch if were in horizontal range
+
+                switch (GetComponentInParent<TileScript>().Type)
+                {
+                    case TileType.Jelly:
+                        connections.Add(tileCon);
+                        tileCon.connections.Add(this);
+                        break;
+
+                    default:
+                        if (CheckInVertRange(this, tileCon))
                         {
                             connections.Add(tileCon);
                         }
-                        continue;
-                    }
-
-                    connections.Add(tileCon);
-                    tileCon.connections.Add(this);
-
-                    break;
+                        else
+                        {
+                            connections.Add(tileCon);
+                            tileCon.connections.Add(this);
+                        }
+                        break;
+                }
             }
+
+
 
         }
 
@@ -155,7 +174,7 @@ public class TileConnectionsScript : MonoBehaviour {
 
         float horizontalDist = Vector3.Distance(myPos, theirPos);
 
-        return (horizontalDist < distanceCheck);
+        return (horizontalDist <= distanceCheck);
     }
 
     bool CheckInVertRange(TileConnectionsScript myTile, TileConnectionsScript otherTile)

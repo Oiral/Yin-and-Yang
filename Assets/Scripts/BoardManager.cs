@@ -9,6 +9,10 @@ public class BoardManager : MonoBehaviour
     public List<TileConnectionsScript> topTileConnections = new List<TileConnectionsScript>();
     //public List<TileConnectionsScript> bottomTileConnections = new List<TileConnectionsScript>();
 
+        [Header("Visual Prefabs")]
+    public GameObject teleporterVisuals;
+    public GameObject jellyVisuals;
+
 
     [ContextMenu("Update Board")]
     public void UpdateBoard()
@@ -40,6 +44,7 @@ public class BoardManager : MonoBehaviour
     private void Awake()
     {
         UpdateBoard();
+        UpdateBoardVisuals();
     }
 
     public List<TileScript> GetTiles(TileType typeToCheck)
@@ -58,11 +63,13 @@ public class BoardManager : MonoBehaviour
         return tilesToReturn;
     }
 
+    [Header("Materials")]
     public Material iceMaterial;
     public Material normalMaterial;
     public Material goalClosedMaterial;
     public Material goalOpenMaterial;
     public Material jellyMaterial;
+    public Material teleporterMaterial;
 
     public void ChangeGoalMaterial(bool isOpen)
     {
@@ -101,7 +108,7 @@ public class BoardManager : MonoBehaviour
 
     public void ChangeTileMaterial(TileScript tile, Material materialToChangeTo, Material secondaryMaterial)
     {
-        if (tile.GetComponent<MeshRenderer>().sharedMaterials[0] == materialToChangeTo)
+        if (tile.visual.GetComponent<MeshRenderer>().sharedMaterials[0] == materialToChangeTo)
         {
             return;
         }
@@ -129,6 +136,9 @@ public class BoardManager : MonoBehaviour
             case TileType.Jelly:
                 ChangeTileMaterial(tile, jellyMaterial, jellyMaterial);
                 break;
+            case TileType.Teleport:
+                ChangeTileMaterial(tile, teleporterMaterial);
+                break;
 
             default:
                 ChangeTileMaterial(tile, normalMaterial);
@@ -139,6 +149,41 @@ public class BoardManager : MonoBehaviour
 
     public void UpdateBoardVisuals()
     {
+        for (int i = 0; i < tiles.Count; i++)
+        {
+            switch (tiles[i].Type)
+            {
 
+                case TileType.Jelly:
+                    UpdateTileVisual(tiles[i],jellyVisuals);
+                    break;
+
+                case TileType.Teleport:
+                    UpdateTileVisual(tiles[i],teleporterVisuals);
+                    break;
+
+                default:
+                    break;
+            }
+        }
+    }
+
+    void UpdateTileVisual(TileScript tile,GameObject prefab)
+    {
+
+        if (prefab == null)
+        {
+            return;
+        }
+
+        if (tile.tileAdditionalVisual != null)
+        {
+            //Lets destroy the visual
+            Destroy(tile.tileAdditionalVisual);
+        }
+
+        //Lets create the new visual
+        GameObject visual = Instantiate(prefab, tile.transform);
+        tile.tileAdditionalVisual = visual;
     }
 }
