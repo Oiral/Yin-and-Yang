@@ -9,7 +9,6 @@ public class PlayerMovement : MonoBehaviour {
     public TileConnectionsScript targetTile;
     TileConnectionsScript startingTile;
     public float respawnTime = 2;
-    public GameObject otherPlayer;
 
     public TileScript currentTile;
 
@@ -20,11 +19,13 @@ public class PlayerMovement : MonoBehaviour {
 
     public LevelManagerScript levelManager;
 
+    public PlayerController controller;
+
     public bool canMove = true;
 
     public float moveSpeed = 0.2f;
 
-    public bool respawnIsRunning;
+    public bool isMainPlayer;
 
     private void Start()
     {
@@ -43,11 +44,6 @@ public class PlayerMovement : MonoBehaviour {
     public bool MovePlayer(Direction dir,bool primary)
     {
         if (!canMove)
-        {
-            return false;
-        }
-
-        if (respawnIsRunning)
         {
             return false;
         }
@@ -84,7 +80,7 @@ public class PlayerMovement : MonoBehaviour {
                             levelManager.NextLevel();
                             return true;
                         }
-                        else if (tile.gameObject.transform.parent == otherPlayer.GetComponent<PlayerMovement>().targetTile.gameObject.transform.parent && !primary)
+                        else if (isMainPlayer == false)
                         {
                             MovePlayer(tile);
                             if (winParticlePrefab != null)
@@ -255,8 +251,13 @@ public class PlayerMovement : MonoBehaviour {
 
     IEnumerator Respawn()
     {
+        yield return 0;
 
-        respawnIsRunning = true;
+        foreach (PlayerMovement key in controller.keyMoveScripts)
+        {
+            key.canMove = false;
+        }
+        controller.playerMoveScript.canMove = false;
 
         yield return new WaitForSeconds(0.2f);
 
@@ -271,8 +272,14 @@ public class PlayerMovement : MonoBehaviour {
         currentTile = startingTile.GetComponentInParent<TileScript>();
         targetTile = startingTile;
         transform.position = startingTile.transform.position;
-        GameObject.FindWithTag("GameController").GetComponent<LevelController>().OnPlayerMove();
-        respawnIsRunning = false;
+        LevelController levelController = GameObject.FindWithTag("GameController").GetComponent<LevelController>();
+        levelController.OnPlayerMove();
+
+        foreach (PlayerMovement key in controller.keyMoveScripts)
+        {
+            key.canMove = true;
+        }
+        controller.playerMoveScript.canMove = true;
 
     }
 
@@ -295,7 +302,7 @@ public class PlayerMovement : MonoBehaviour {
 
     void PlaySound(string soundName)
     {
-        if (AudioManager.instance != null)
+        if (AudioManager.instance != null && isMainPlayer)
         {
             AudioManager.instance.PlaySound(soundName);
         }

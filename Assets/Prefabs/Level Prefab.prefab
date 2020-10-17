@@ -194,15 +194,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetTile: {fileID: 2500598956982803470}
   respawnTime: 0.5
-  otherPlayer: {fileID: 1157581255458462756}
   currentTile: {fileID: 0}
   splashPrefab: {fileID: 0}
   winParticlePrefab: {fileID: 0}
   turtleAnimator: {fileID: 1157581255419061635}
   levelManager: {fileID: 1157581254605606673}
+  controller: {fileID: 1157581255144952225}
   canMove: 1
   moveSpeed: 0.2
-  respawnIsRunning: 0
+  isMainPlayer: 1
 --- !u!95 &1157581255419061635
 Animator:
   serializedVersion: 3
@@ -370,7 +370,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fd8c61b429596c746a5508165bce3402, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  selectedMoveScript: {fileID: 1157581254342649359}
+  playerMoveScript: {fileID: 1157581254342649359}
   keyMoveScripts:
   - {fileID: 1157581255458462759}
   rotateScript: {fileID: 1157581254586342279}
@@ -594,15 +594,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   targetTile: {fileID: 2500598957432518451}
   respawnTime: 0.5
-  otherPlayer: {fileID: 1157581254342649356}
   currentTile: {fileID: 0}
   splashPrefab: {fileID: 0}
   winParticlePrefab: {fileID: 0}
   turtleAnimator: {fileID: 0}
   levelManager: {fileID: 0}
+  controller: {fileID: 1157581255144952225}
   canMove: 1
   moveSpeed: 0.2
-  respawnIsRunning: 0
+  isMainPlayer: 0
 --- !u!1 &1481780184456593497
 GameObject:
   m_ObjectHideFlags: 0

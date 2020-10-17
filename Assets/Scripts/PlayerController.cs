@@ -4,7 +4,7 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour {
 
-    public PlayerMovement selectedMoveScript;
+    public PlayerMovement playerMoveScript;
     public List<PlayerMovement> keyMoveScripts = new List<PlayerMovement>();
 
     public RotateBoard rotateScript;
@@ -39,7 +39,7 @@ public class PlayerController : MonoBehaviour {
 
     public void Move(Direction dir)
     {
-        if (selectedMoveScript.MovePlayer(dir, true))
+        if (playerMoveScript.MovePlayer(dir, true))
         {
             //Debug.Log("Move Other Player");
             //keyMoveScripts.MovePlayer(dir, false);

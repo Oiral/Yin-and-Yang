@@ -51,6 +51,7 @@ public class LevelManagerScript : MonoBehaviour {
 
     IEnumerator WaitForNextLevel()
     {
+        AudioManager.instance.PlaySound("Win");
         yield return new WaitForSeconds(waitTime * 0.8f);
         //FindBoard
         if (GameObject.FindGameObjectWithTag("Board") != null)

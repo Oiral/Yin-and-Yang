@@ -31,6 +31,7 @@ public class AudioManager : MonoBehaviour
     public AudioClip cannotMoveSFX;
     public AudioClip teleportSFX;
     public AudioClip slimeSFX;
+    public AudioClip winSFX;
 
     public void PlaySound(string soundName)
     {
@@ -49,6 +50,9 @@ public class AudioManager : MonoBehaviour
 
             case "Slime":
                 PlaySound(slimeSFX);
+                break;
+            case "Win":
+                PlaySound(winSFX);
                 break;
 
             default:

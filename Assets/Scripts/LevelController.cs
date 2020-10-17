@@ -33,7 +33,7 @@ public class LevelController : MonoBehaviour
     {
         //if all keys are in the same spot as the player
 
-        TileScript playerTile = controller.selectedMoveScript.currentTile;
+        TileScript playerTile = controller.playerMoveScript.currentTile;
 
         foreach (PlayerMovement key in controller.keyMoveScripts)
         {
