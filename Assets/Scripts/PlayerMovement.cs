@@ -67,7 +67,7 @@ public class PlayerMovement : MonoBehaviour {
                         return true;
 
                     case TileType.Goal:
-                        if (FindObjectOfType<LevelController>().goalOpen && primary)
+                        if (FindObjectOfType<LevelController>().goalOpen)
                         {
                             MovePlayer(tile);
                             if (winParticlePrefab != null)
@@ -77,19 +77,10 @@ public class PlayerMovement : MonoBehaviour {
                             //Play the win Animation
                             //turtleAnimator.SetTrigger("Win");
                             //SoundManager.instance.PlaySound("win");
-                            levelManager.NextLevel();
-                            return true;
-                        }
-                        else if (isMainPlayer == false)
-                        {
-                            MovePlayer(tile);
-                            if (winParticlePrefab != null)
+                            if (isMainPlayer)
                             {
-                                Instantiate(winParticlePrefab, targetTile.transform.position, targetTile.transform.rotation, null);
+                                levelManager.NextLevel();
                             }
-                            //Play the win Animation
-                            //turtleAnimator.SetTrigger("Win");
-                            //SoundManager.instance.PlaySound("win");
                             return true;
                         }
                         else
