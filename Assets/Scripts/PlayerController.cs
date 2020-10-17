@@ -9,6 +9,21 @@ public class PlayerController : MonoBehaviour {
 
     public RotateBoard rotateScript;
 
+
+    public static PlayerController instance;
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Debug.LogWarning("An additional Board Manager has been found, Destroying");
+            Destroy(this);
+        }
+    }
+
     // Update is called once per frame
     void Update () {
 		if (Input.GetButtonDown("up"))

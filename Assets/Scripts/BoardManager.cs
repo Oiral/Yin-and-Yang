@@ -40,9 +40,19 @@ public class BoardManager : MonoBehaviour
         }
 
     }
+    public static BoardManager instance;
 
     private void Awake()
     {
+        if (instance == null)
+        {
+            instance = this;
+        }else if (instance != this)
+        {
+            Debug.LogWarning("An additional Board Manager has been found, Destroying");
+            Destroy(this);
+        }
+
         UpdateBoard();
         UpdateBoardVisuals();
     }

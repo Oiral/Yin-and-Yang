@@ -2,8 +2,6 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum Direction { North, East, South, West };
-
 public class PlayerMovement : MonoBehaviour {
 
     public TileConnectionsScript targetTile;
@@ -19,7 +17,7 @@ public class PlayerMovement : MonoBehaviour {
 
     public LevelManagerScript levelManager;
 
-    public PlayerController controller;
+    PlayerController controller;
 
     public bool canMove = true;
 
@@ -29,6 +27,7 @@ public class PlayerMovement : MonoBehaviour {
 
     private void Start()
     {
+        controller = PlayerController.instance;
         startingTile = targetTile;
         currentTile = targetTile.GetComponentInParent<TileScript>();
         //turtleAnimator = GetComponentInChildren<Animator>();
@@ -52,7 +51,7 @@ public class PlayerMovement : MonoBehaviour {
         foreach (TileConnectionsScript tile in targetTile.connections)
         {
             
-            if (CheckDirection(targetTile.transform.position, tile.transform.position) == dir)
+            if (DirectionHelper.CheckDirection(targetTile.transform.position, tile.transform.position) == dir)
             {
                 //DisableMovementInput(0.23f);
                 switch (tile.GetComponentInParent<TileScript>().Type)
@@ -109,6 +108,17 @@ public class PlayerMovement : MonoBehaviour {
                             MovePlayer(tile);
                             return true;
                         }
+
+                    case TileType.Button:
+                        MovePlayer(tile);
+                        if (tile.GetComponentInParent<TileButton>() != null)
+                        {
+                            tile.GetComponentInParent<TileButton>().steppedOnEvent.Invoke();
+                        }
+                        else
+                            Debug.LogError("Missing Tile button on Tile", tile.gameObject);
+                        
+                        return true;
 
                     default:
                         LookAtConnection(dir);
@@ -180,56 +190,11 @@ public class PlayerMovement : MonoBehaviour {
 
     void LookAtConnection(Direction dir)
     {
-        Vector3 offset = VectorFromDir(dir);
+        Vector3 offset = DirectionHelper.VectorFromDir(dir);
 
         Vector3 lookPos = transform.position + offset;
 
         transform.LookAt(lookPos,Vector3.up);
-    }
-
-    private Direction CheckDirection(Vector3 startingPos, Vector3 checkingPos)
-    {
-        if (startingPos.x < checkingPos.x)
-        {
-            return Direction.East;
-        }else if (startingPos.x > checkingPos.x)
-        {
-            return Direction.West;
-        }else if (startingPos.z < checkingPos.z)
-        {
-            return Direction.North;
-        }
-        else if (startingPos.z > checkingPos.z)
-        {
-            return Direction.South;
-        }
-        else
-        {
-            Debug.LogError("Can't find Direction - Defaulting to North");
-            return Direction.North;
-        } 
-            
-    }
-
-    private Vector3 VectorFromDir(Direction dir)
-    {
-        Vector3 vector = Vector3.zero;
-
-        switch (dir)
-        {
-            case Direction.North:
-                return Vector3.forward;
-
-            case Direction.South:
-                return Vector3.back;
-
-            case Direction.East:
-                return Vector3.right;
-
-            case Direction.West:
-                return Vector3.left;
-        }
-        return vector;
     }
 
     void Animate(string movement)
