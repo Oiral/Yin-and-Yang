@@ -12,6 +12,7 @@ public class BoardManager : MonoBehaviour
         [Header("Visual Prefabs")]
     public GameObject teleporterVisuals;
     public GameObject jellyVisuals;
+    public GameObject buttonVisuals;
 
 
     [ContextMenu("Update Board")]
@@ -165,11 +166,14 @@ public class BoardManager : MonoBehaviour
             {
 
                 case TileType.Jelly:
-                    UpdateTileVisual(tiles[i],jellyVisuals);
+                    UpdateTileVisual(tiles[i], jellyVisuals);
                     break;
 
                 case TileType.Teleport:
-                    UpdateTileVisual(tiles[i],teleporterVisuals);
+                    UpdateTileVisual(tiles[i], teleporterVisuals);
+                    break;
+                case TileType.Button:
+                    UpdateTileVisual(tiles[i], buttonVisuals);
                     break;
 
                 default:

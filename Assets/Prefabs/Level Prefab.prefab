@@ -199,7 +199,6 @@ MonoBehaviour:
   winParticlePrefab: {fileID: 0}
   turtleAnimator: {fileID: 1157581255419061635}
   levelManager: {fileID: 1157581254605606673}
-  controller: {fileID: 1157581255144952225}
   canMove: 1
   moveSpeed: 0.2
   isMainPlayer: 1
@@ -319,6 +318,7 @@ MonoBehaviour:
   - {fileID: 2500598956982803470}
   teleporterVisuals: {fileID: 7108554795210389393, guid: f53bf9a27a99a4558afe68bd95749bb6, type: 3}
   jellyVisuals: {fileID: 2377016150040360766, guid: 097e352353caf4e4f8eedbbcda7cf673, type: 3}
+  buttonVisuals: {fileID: 3751828918213981497, guid: 434f5472ab1304874afce88093daeb4b, type: 3}
   iceMaterial: {fileID: 2100000, guid: 87484113783154333a23ab1cd7353ac9, type: 2}
   normalMaterial: {fileID: 2100000, guid: 8291bd461663a4ebe9300209b517bf8a, type: 2}
   goalClosedMaterial: {fileID: 2100000, guid: cd94392dfd75e4fb0a064f66a1fb2875, type: 2}
@@ -599,7 +599,6 @@ MonoBehaviour:
   winParticlePrefab: {fileID: 0}
   turtleAnimator: {fileID: 0}
   levelManager: {fileID: 0}
-  controller: {fileID: 1157581255144952225}
   canMove: 1
   moveSpeed: 0.2
   isMainPlayer: 0
@@ -13964,7 +13963,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3648873941780566741, guid: 5af19d9c5e49041aea697ed1c4e19421, type: 3}
       propertyPath: connections.Array.size
-      value: 3
+      value: 8
       objectReference: {fileID: 0}
     - target: {fileID: 3648873941780566741, guid: 5af19d9c5e49041aea697ed1c4e19421, type: 3}
       propertyPath: connections.Array.data[0]
@@ -14120,7 +14119,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3648873941780566741, guid: 5af19d9c5e49041aea697ed1c4e19421, type: 3}
       propertyPath: connections.Array.size
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3648873941780566741, guid: 5af19d9c5e49041aea697ed1c4e19421, type: 3}
       propertyPath: connections.Array.data[0]
@@ -14276,7 +14275,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3648873941780566741, guid: 5af19d9c5e49041aea697ed1c4e19421, type: 3}
       propertyPath: connections.Array.size
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 3648873941780566741, guid: 5af19d9c5e49041aea697ed1c4e19421, type: 3}
       propertyPath: connections.Array.data[0]
@@ -14424,7 +14423,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3648873941780566741, guid: 5af19d9c5e49041aea697ed1c4e19421, type: 3}
       propertyPath: connections.Array.size
-      value: 1
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 3648873941780566741, guid: 5af19d9c5e49041aea697ed1c4e19421, type: 3}
       propertyPath: connections.Array.data[0]

@@ -11,9 +11,12 @@ public class MovingTile : MonoBehaviour
 
     public float moveTime = 0.3f;
 
+    public GameObject displayTrackPrefab;
+
     private void Start()
     {
         startingPos = transform.position;
+        SpawnTrackPrefab();
     }
 
     public void ButtonSteppedOn()
@@ -48,11 +51,25 @@ public class MovingTile : MonoBehaviour
 
     }
 
-    private void OnDrawGizmosSelected()
+    private void OnDrawGizmos()
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(endPos, 0.2f);
 
         Gizmos.DrawLine(transform.position, endPos);
+    }
+
+    void SpawnTrackPrefab()
+    {
+        if (displayTrackPrefab == null)
+            return;
+
+        GameObject spawnedPrefab = Instantiate(displayTrackPrefab, transform.position, Quaternion.identity,BoardManager.instance.transform);
+        spawnedPrefab.transform.LookAt(endPos);
+
+        Vector3 scale = spawnedPrefab.transform.localScale;
+        scale.y = Vector3.Distance(startingPos, endPos);
+
+        spawnedPrefab.transform.localScale = scale;
     }
 }
