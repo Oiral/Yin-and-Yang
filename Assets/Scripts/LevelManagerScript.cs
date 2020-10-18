@@ -29,6 +29,19 @@ public class LevelManagerScript : MonoBehaviour {
     private void Start()
     {
         currentLevel = SceneManager.GetActiveScene().buildIndex;
+
+        if (PlayerPrefs.HasKey("Level"))
+        {
+            if (currentLevel > PlayerPrefs.GetInt("Level"))
+            {
+                PlayerPrefs.SetInt("Level", currentLevel);
+            }
+        }
+        else
+        {
+            PlayerPrefs.SetInt("Level", 1);
+        }
+
     }
 
     public void NextLevel()
