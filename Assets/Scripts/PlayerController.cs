@@ -9,6 +9,10 @@ public class PlayerController : MonoBehaviour {
 
     public RotateBoard rotateScript;
 
+    public int moveCount = 0;
+    public int bestMoveCount = 0;
+
+    public UIManager userInterface;
 
     public static PlayerController instance;
     private void Awake()
@@ -22,6 +26,9 @@ public class PlayerController : MonoBehaviour {
             Debug.LogWarning("An additional Board Manager has been found, Destroying");
             Destroy(this);
         }
+
+        moveCount = 0;
+        UpdateMoveCount(0);
     }
 
     // Update is called once per frame
@@ -56,6 +63,7 @@ public class PlayerController : MonoBehaviour {
     {
         if (playerMoveScript.MovePlayer(dir, true))
         {
+            UpdateMoveCount(1);
             //Debug.Log("Move Other Player");
             //keyMoveScripts.MovePlayer(dir, false);
             moveKeys(dir);
@@ -100,6 +108,13 @@ public class PlayerController : MonoBehaviour {
         {
             key.MovePlayer(dir, false);
         }
+    }
+
+    void UpdateMoveCount(int changeNum)
+    {
+        moveCount += changeNum;
+
+        userInterface.UpdateMoveCount(moveCount);
     }
 
 }

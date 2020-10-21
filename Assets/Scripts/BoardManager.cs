@@ -1,6 +1,10 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+#if UNITY_EDITOR
+using UnityEditor;
+using UnityEditor.SceneManagement;
+#endif
 
 public class BoardManager : MonoBehaviour
 {
@@ -12,7 +16,7 @@ public class BoardManager : MonoBehaviour
         [Header("Visual Prefabs")]
     public GameObject teleporterVisuals;
     public GameObject jellyVisuals;
-    public GameObject buttonVisuals;
+    //public GameObject buttonVisuals;
 
 
     [ContextMenu("Update Board")]
@@ -24,7 +28,12 @@ public class BoardManager : MonoBehaviour
         topTileConnections = new List<TileConnectionsScript>();
 
         //bottomTileConnections = new List<TileConnectionsScript>();
-
+#if UNITY_EDITOR
+        if (Application.isPlaying == false)
+        {
+            EditorSceneManager.MarkSceneDirty(EditorSceneManager.GetActiveScene());
+        }
+#endif
 
         foreach (TileScript tile in FindObjectsOfType(typeof(TileScript)))
         {
@@ -81,6 +90,7 @@ public class BoardManager : MonoBehaviour
     public Material goalOpenMaterial;
     public Material jellyMaterial;
     public Material teleporterMaterial;
+    public Material buttonMaterial;
 
     public void ChangeGoalMaterial(bool isOpen)
     {
@@ -104,25 +114,28 @@ public class BoardManager : MonoBehaviour
 
     public void ChangeTileMaterial (TileScript tile, Material materialToChangeTo)
     {
+        /*
         if (tile.visual.GetComponent<MeshRenderer>().sharedMaterials[0] == materialToChangeTo)
         {
             return;
-        }
+        }*/
 
         Material[] rendererMats = tile.visual.GetComponent<MeshRenderer>().sharedMaterials;
 
         rendererMats[0] = materialToChangeTo;
-        rendererMats[1] = normalMaterial;
+        rendererMats[2] = normalMaterial;
 
         tile.visual.GetComponent<MeshRenderer>().sharedMaterials = rendererMats;
     }
 
     public void ChangeTileMaterial(TileScript tile, Material materialToChangeTo, Material secondaryMaterial)
     {
+        /*
         if (tile.visual.GetComponent<MeshRenderer>().sharedMaterials[0] == materialToChangeTo)
         {
             return;
         }
+        */
 
         Material[] rendererMats = tile.visual.GetComponent<MeshRenderer>().sharedMaterials;
 
@@ -137,7 +150,7 @@ public class BoardManager : MonoBehaviour
         switch (tile.Type)
         {
             case TileType.Ice:
-                ChangeTileMaterial(tile, iceMaterial);
+                ChangeTileMaterial(tile, iceMaterial, iceMaterial);
                 break;
 
             case TileType.Goal:
@@ -149,6 +162,10 @@ public class BoardManager : MonoBehaviour
                 break;
             case TileType.Teleport:
                 ChangeTileMaterial(tile, teleporterMaterial);
+                break;
+
+            case TileType.Button:
+                ChangeTileMaterial(tile, buttonMaterial);
                 break;
 
             default:
@@ -172,9 +189,11 @@ public class BoardManager : MonoBehaviour
                 case TileType.Teleport:
                     UpdateTileVisual(tiles[i], teleporterVisuals);
                     break;
+                    /*
                 case TileType.Button:
                     UpdateTileVisual(tiles[i], buttonVisuals);
                     break;
+                    */                   
 
                 default:
                     break;

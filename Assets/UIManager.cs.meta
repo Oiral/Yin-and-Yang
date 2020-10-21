@@ -1,10 +1,9 @@
 fileFormatVersion: 2
-guid: 81cd0e05c76f24321b3dee00b1d36a34
+guid: 8410b00efe95d4da785ae3025355b4d3
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences:
-  - displayTrackPrefab: {fileID: 5647479411087589535, guid: 1924d2c2018be48d6aec6e300e49f0d9, type: 3}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

@@ -11,9 +11,25 @@ public class LevelController : MonoBehaviour
 
     public bool goalOpen;
 
+
+
+    public static LevelController instance;
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }
+        else if (instance != this)
+        {
+            Debug.LogWarning("An additional Board Manager has been found, Destroying", gameObject);
+            Destroy(this);
+        }
+    }
+
     private void Start()
     {
-        controller = GetComponent<PlayerController>();
+        controller = PlayerController.instance;
         OnPlayerMove();
     }
 
@@ -25,27 +41,29 @@ public class LevelController : MonoBehaviour
     public void OnPlayerMove()
     {
         goalOpen = CheckAllKeysOnPlayer();
-
-        boardManager.ChangeGoalMaterial(goalOpen);
     }
 
-    bool CheckAllKeysOnPlayer()
+   public bool CheckAllKeysOnPlayer()
     {
         //if all keys are in the same spot as the player
 
         TileScript playerTile = controller.playerMoveScript.currentTile;
+
+        bool allKeysOnPlayer = true;
 
         foreach (PlayerMovement key in controller.keyMoveScripts)
         {
             if (key.currentTile != playerTile)
             {
                 //If any key is not on the same tile this should return false
-                return false;
+                allKeysOnPlayer = false;
             }
         }
 
+        boardManager.ChangeGoalMaterial(allKeysOnPlayer);
+
         //We only get here is all the keys are in the same place as the player
-        return true;
+        return allKeysOnPlayer;
 
     }
 

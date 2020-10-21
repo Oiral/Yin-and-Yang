@@ -11,7 +11,11 @@ public class MovingTile : MonoBehaviour
 
     public float moveTime = 0.3f;
 
+    [SerializeField]
     public GameObject displayTrackPrefab;
+
+    bool moving;
+
 
     private void Start()
     {
@@ -21,7 +25,11 @@ public class MovingTile : MonoBehaviour
 
     public void ButtonSteppedOn()
     {
+        if (moving)
+            return;
+
         atStart = !atStart;
+
 
         if (atStart)
         {
@@ -35,6 +43,8 @@ public class MovingTile : MonoBehaviour
 
     IEnumerator MoveTile(Vector3 start, Vector3 end)
     {
+        moving = true;
+
         float elapsedTime = 0f;
 
         while (elapsedTime < moveTime)
@@ -47,6 +57,8 @@ public class MovingTile : MonoBehaviour
         transform.position = end;
 
         BoardManager.instance.UpdateBoard();
+        LevelController.instance.CheckAllKeysOnPlayer();
+        moving = false;
 
 
     }
@@ -55,6 +67,7 @@ public class MovingTile : MonoBehaviour
     {
         Gizmos.color = Color.green;
         Gizmos.DrawWireSphere(endPos, 0.2f);
+        Gizmos.DrawWireSphere(transform.position, 0.2f);
 
         Gizmos.DrawLine(transform.position, endPos);
     }
@@ -64,8 +77,10 @@ public class MovingTile : MonoBehaviour
         if (displayTrackPrefab == null)
             return;
 
-        GameObject spawnedPrefab = Instantiate(displayTrackPrefab, transform.position, Quaternion.identity,BoardManager.instance.transform);
-        spawnedPrefab.transform.LookAt(endPos);
+        Vector3 offset = Vector3.up * 0.4f;
+
+        GameObject spawnedPrefab = Instantiate(displayTrackPrefab, transform.position + offset, Quaternion.identity,BoardManager.instance.transform);
+        spawnedPrefab.transform.LookAt(endPos + offset);
 
         Vector3 scale = spawnedPrefab.transform.localScale;
         scale.y = Vector3.Distance(startingPos, endPos);

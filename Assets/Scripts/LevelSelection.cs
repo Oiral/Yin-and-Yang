@@ -13,29 +13,24 @@ public class LevelSelection : MonoBehaviour
     public LevelManagerScript levelManager;
 
 
-
     private void Start()
     {
-        int highestLevel = 1;
-
-        if (PlayerPrefs.HasKey("Level"))
-        {
-            highestLevel = PlayerPrefs.GetInt("Level");
-            Debug.Log("Test");
-        }
-
-        Debug.Log(highestLevel);
-
+        bool previousLevelCompleted = true;
 
         for (int i = 1; i < SceneManager.sceneCountInBuildSettings; i++)
         {
-            if (i <= highestLevel)
+            string sceneName = System.IO.Path.GetFileNameWithoutExtension(SceneUtility.GetScenePathByBuildIndex(i));
+            //Debug.Log(SceneManager.GetSceneByBuildIndex(i).name);
+
+            if (LevelCompleted(sceneName) || previousLevelCompleted)
             {
                 GameObject spawnedButton = Instantiate(levelButtonPrefab, transform);
                 LevelSelectionButton button = spawnedButton.GetComponent<LevelSelectionButton>();
 
                 button.textName.text = "Level " + i;
                 button.levelNum = i;
+                previousLevelCompleted = LevelCompleted(sceneName);
+                button.moveCountNum.text = GetMoveCount(sceneName);
             }
             else
             {
@@ -43,10 +38,36 @@ public class LevelSelection : MonoBehaviour
                 LevelSelectionButton button = spawnedButton.GetComponent<LevelSelectionButton>();
 
                 button.textName.text = i.ToString();
+                previousLevelCompleted = false;
             }
 
-            
+
         }
 
+    }
+
+    public bool LevelCompleted(string sceneName)
+    {
+        //Debug.Log(sceneName);
+        if (PlayerPrefs.HasKey(sceneName))
+        {
+            return true;
+        }
+        else
+        {
+            return false;
+        }
+    }
+
+    public string GetMoveCount(string sceneName)
+    {
+        if (PlayerPrefs.HasKey(sceneName))
+        {
+            return PlayerPrefs.GetInt(sceneName).ToString();
+        }
+        else
+        {
+            return "- -";
+        }
     }
 }

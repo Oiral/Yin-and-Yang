@@ -30,18 +30,19 @@ public class LevelManagerScript : MonoBehaviour {
     {
         currentLevel = SceneManager.GetActiveScene().buildIndex;
 
-        if (PlayerPrefs.HasKey("Level"))
+        if (PlayerController.instance == null)
         {
-            if (currentLevel > PlayerPrefs.GetInt("Level"))
-            {
-                PlayerPrefs.SetInt("Level", currentLevel);
-            }
+            return;
         }
-        else
+        int highScore = 0;
+
+        if (PlayerPrefs.HasKey(SceneManager.GetActiveScene().name))
         {
-            PlayerPrefs.SetInt("Level", 1);
+            highScore = PlayerPrefs.GetInt(SceneManager.GetActiveScene().name);
         }
 
+        //We want to set our highscore
+        PlayerController.instance.bestMoveCount = highScore;
     }
 
     public void NextLevel()
@@ -64,6 +65,8 @@ public class LevelManagerScript : MonoBehaviour {
 
     IEnumerator WaitForNextLevel()
     {
+        SaveScore(PlayerController.instance.moveCount);
+
         AudioManager.instance.PlaySound("Win");
         yield return new WaitForSeconds(waitTime * 0.8f);
         //FindBoard
@@ -116,5 +119,18 @@ public class LevelManagerScript : MonoBehaviour {
     {
         SceneManager.LoadScene(currentLevel);
         //UIScript.instance.SetPauseMenu(false);
+    }
+
+    public void SaveScore(int score)
+    {
+        Debug.Log(SceneManager.GetActiveScene().name);
+        if (PlayerPrefs.HasKey(SceneManager.GetActiveScene().name) == false)
+        {
+            PlayerPrefs.SetInt(SceneManager.GetActiveScene().name, score);
+        }
+        else if (PlayerPrefs.GetInt(SceneManager.GetActiveScene().name) > score)
+        {
+            PlayerPrefs.SetInt(SceneManager.GetActiveScene().name, score);
+        }
     }
 }

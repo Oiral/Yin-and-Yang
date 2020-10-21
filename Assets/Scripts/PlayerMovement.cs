@@ -239,11 +239,6 @@ public class PlayerMovement : MonoBehaviour {
 
     }
 
-    public void DisableMovementInputOnRotation(float time)
-    {
-        DisableMovementInput(time);
-    }
-
     void DisableMovementInput(float time)
     {
         canMove = false;
