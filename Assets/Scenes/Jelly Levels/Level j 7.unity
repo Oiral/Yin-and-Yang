@@ -7708,6 +7708,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 228723426109715741, guid: 0041c6e5aa9d549328af828419cc33a9,
+        type: 3}
+      propertyPath: orthographic size
+      value: 5.7
+      objectReference: {fileID: 0}
     - target: {fileID: 2315653481848225145, guid: 0041c6e5aa9d549328af828419cc33a9,
         type: 3}
       propertyPath: m_Name
@@ -7767,6 +7772,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 2465581734009807013, guid: 0041c6e5aa9d549328af828419cc33a9,
+        type: 3}
+      propertyPath: offset.z
+      value: 0.25
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 2315653481848225146, guid: 0041c6e5aa9d549328af828419cc33a9, type: 3}

@@ -117,4 +117,13 @@ public class PlayerController : MonoBehaviour {
         userInterface.UpdateMoveCount(moveCount);
     }
 
+    public void ToggleMovement(bool toggle){
+
+        playerMoveScript.canMove = toggle;
+
+        foreach (PlayerMovement key in keyMoveScripts)
+        {
+            key.canMove = toggle;
+        }
+    }
 }

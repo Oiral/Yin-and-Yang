@@ -5760,5 +5760,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 2465581734009807013, guid: 0041c6e5aa9d549328af828419cc33a9,
+        type: 3}
+      propertyPath: offset.x
+      value: 0.4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 0041c6e5aa9d549328af828419cc33a9, type: 3}

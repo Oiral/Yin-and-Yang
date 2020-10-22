@@ -44,6 +44,9 @@ public class MovingTile : MonoBehaviour
     IEnumerator MoveTile(Vector3 start, Vector3 end)
     {
         moving = true;
+        PlayerController.instance.ToggleMovement(false);
+
+        yield return new WaitForSeconds(0.2f);
 
         float elapsedTime = 0f;
 
@@ -59,6 +62,7 @@ public class MovingTile : MonoBehaviour
         BoardManager.instance.UpdateBoard();
         LevelController.instance.CheckAllKeysOnPlayer();
         moving = false;
+        PlayerController.instance.ToggleMovement(true);
 
 
     }

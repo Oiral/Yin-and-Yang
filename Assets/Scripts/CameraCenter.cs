@@ -4,6 +4,10 @@ using UnityEngine;
 
 public class CameraCenter : MonoBehaviour
 {
+    public Vector3 offset;
+
+    Vector3 pos;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -43,8 +47,12 @@ public class CameraCenter : MonoBehaviour
         }
 
         averageY /= manager.tiles.Count;
+        pos = new Vector3((maxX + minX) / 2, averageY, (maxZ + minZ) / 2);
 
-        transform.position = new Vector3((maxX + minX) / 2, averageY, (maxZ + minZ) / 2);
+    }
 
+    private void Update()
+    {
+        transform.position = pos + offset;
     }
 }

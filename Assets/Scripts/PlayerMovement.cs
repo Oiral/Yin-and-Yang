@@ -209,11 +209,7 @@ public class PlayerMovement : MonoBehaviour {
     {
         yield return 0;
 
-        foreach (PlayerMovement key in controller.keyMoveScripts)
-        {
-            key.canMove = false;
-        }
-        controller.playerMoveScript.canMove = false;
+        PlayerController.instance.ToggleMovement(false);
 
         yield return new WaitForSeconds(0.2f);
 
@@ -231,24 +227,20 @@ public class PlayerMovement : MonoBehaviour {
         LevelController levelController = GameObject.FindWithTag("GameController").GetComponent<LevelController>();
         levelController.OnPlayerMove();
 
-        foreach (PlayerMovement key in controller.keyMoveScripts)
-        {
-            key.canMove = true;
-        }
-        controller.playerMoveScript.canMove = true;
+        PlayerController.instance.ToggleMovement(true);
 
     }
 
     void DisableMovementInput(float time)
     {
-        canMove = false;
+        PlayerController.instance.ToggleMovement(false);
         StartCoroutine(ReenableMovement(time));
     }
 
     IEnumerator ReenableMovement(float time)
     {
         yield return new WaitForSeconds(time);
-        canMove = true;
+        PlayerController.instance.ToggleMovement(true);
     }
 
     void PlaySound(string soundName)
