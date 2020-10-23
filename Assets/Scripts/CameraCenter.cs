@@ -13,6 +13,13 @@ public class CameraCenter : MonoBehaviour
     {
         //Debug.LogError("Stopping first");
         BoardManager manager = GameObject.FindWithTag("Board").GetComponent<BoardManager>();
+
+        pos = transform.position;
+
+        if (manager == null)
+        {
+            return;
+        }
         //Target Position
         float averageY = 0f;
 
