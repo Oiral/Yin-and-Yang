@@ -63,6 +63,9 @@ EditorBuildSettings:
     path: Assets/Scenes/Ice Levels/Level i 7.unity
     guid: 026db93d823f342cd9c7f181102f89ad
   - enabled: 1
+    path: Assets/Scenes/Ice Levels/Level i 8.unity
+    guid: d0cdf9e99391f4454b6402ecfee8db04
+  - enabled: 1
     path: Assets/Scenes/Jelly Levels/Level j 1.unity
     guid: ae3b1970d4fcd4d76901243f016dcd09
   - enabled: 1
@@ -83,6 +86,12 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Jelly Levels/Level j 7.unity
     guid: 8c4be7aee237e4870bb47564ac6561c0
+  - enabled: 1
+    path: Assets/Scenes/Multi Key Levels/Level M 1.unity
+    guid: 80297d40dc2424218a8736c6475e7445
+  - enabled: 1
+    path: Assets/Scenes/Multi Key Levels/Level M 2.unity
+    guid: 92e8521a79cc54e2bb7e43c5b14538b2
   - enabled: 1
     path: Assets/Scenes/Teleport Levels/Teleport Level 1.unity
     guid: 8482c7a8303134f64828bcf0c7df18e9
@@ -122,4 +131,7 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Button Levels/Button 5.unity
     guid: e1982c4b947e64336842d24e05be4144
+  - enabled: 1
+    path: Assets/Scenes/Button Levels/Button 6.unity
+    guid: 03d6a3a657ab440df8a3b24565415922
   m_configObjects: {}

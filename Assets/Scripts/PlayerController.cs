@@ -119,11 +119,31 @@ public class PlayerController : MonoBehaviour {
 
     public void ToggleMovement(bool toggle){
 
-        playerMoveScript.canMove = toggle;
+        if (toggle)
+        {
+            playerMoveScript.canMove = toggle;
+
+            foreach (PlayerMovement key in keyMoveScripts)
+            {
+                key.canMove = toggle;
+            }
+        }
+        else
+        {
+            StartCoroutine(DisableMovement());
+        }
+
+
+    }
+
+    IEnumerator DisableMovement()
+    {
+        yield return 0;
+        playerMoveScript.canMove = false;
 
         foreach (PlayerMovement key in keyMoveScripts)
         {
-            key.canMove = toggle;
+            key.canMove = false;
         }
     }
 }
