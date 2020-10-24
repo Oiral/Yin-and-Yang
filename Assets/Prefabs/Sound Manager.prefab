@@ -239,6 +239,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicSource: {fileID: 116728224282378670}
   sfxSource: {fileID: 116728224282378669}
+  musicTrack:
+  - {fileID: 8300000, guid: 40bfe44a0ed8940fd86e7181f50686f0, type: 3}
+  - {fileID: 8300000, guid: 8b845d9e3d5dc4c73b6cc70f373106b3, type: 3}
+  - {fileID: 8300000, guid: c411019dbd96f4422b13d8fefc193dd9, type: 3}
+  - {fileID: 8300000, guid: 576ab4add91ea4cebab09659e125f800, type: 3}
+  - {fileID: 8300000, guid: 7a00a725bb9764e3cbc3d53030c4dc67, type: 3}
+  - {fileID: 8300000, guid: 44c4f6de2c4f24cbab4a9c8849c815b8, type: 3}
   moveSFX: {fileID: 8300000, guid: e8d4929ee319546feb159fd3049add4d, type: 3}
   cannotMoveSFX: {fileID: 8300000, guid: ee9f7642fe7f94d3f861e2c3c0dfe843, type: 3}
   teleportSFX: {fileID: 8300000, guid: 0ca025f83bdef4c12b97edbd1e3dcf12, type: 3}

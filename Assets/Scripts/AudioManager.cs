@@ -7,6 +7,9 @@ public class AudioManager : MonoBehaviour
     #region Singleton
     public static AudioManager instance;
 
+    string sfxPrefName = "sfxPlaying";
+    string musicPrefName = "musicPlaying";
+
     private void Awake()
     {
         if (instance == null)
@@ -17,6 +20,11 @@ public class AudioManager : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
+        if (PlayerPrefs.HasKey(musicPrefName))
+            MusicAudio = (PlayerPrefs.GetInt(musicPrefName) == 1);
+        if (PlayerPrefs.HasKey(sfxPrefName))
+            SFXAudio = (PlayerPrefs.GetInt(sfxPrefName) == 1);
     }
 
     #endregion
@@ -25,6 +33,38 @@ public class AudioManager : MonoBehaviour
     public AudioSource musicSource;
     public AudioSource sfxSource;
 
+    public bool MusicAudio
+    {
+        get
+        {
+            return !musicMuted;
+        }
+        set
+        {
+            PlayerPrefs.SetInt(musicPrefName, value ? 1 : 0);
+            musicSource.volume = value ? 1 : 0;
+            musicMuted = !value;
+        }
+    }
+
+    public bool SFXAudio
+    {
+        get
+        {
+            return !sfxMuted;
+        }
+        set
+        {
+            PlayerPrefs.SetInt(sfxPrefName, value ? 1 : 0);
+            sfxSource.volume = value ? 1 : 0;
+            sfxMuted = !value;
+        }
+    }
+
+    bool musicMuted;
+    bool sfxMuted;
+
+    public AudioClip[] musicTrack;
 
     [Header("Sound effects")]
     public AudioClip moveSFX;
@@ -67,5 +107,15 @@ public class AudioManager : MonoBehaviour
 
         sfxSource.clip = clip;
         sfxSource.Play();
+    }
+
+    public void Update()
+    {
+        Debug.Log(musicSource.isPlaying);
+        if (musicSource.isPlaying == false)
+        {
+            musicSource.clip = musicTrack[Random.Range(0, musicTrack.Length - 1)];
+            musicSource.Play();
+        }
     }
 }
