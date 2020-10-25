@@ -10,6 +10,9 @@ public static class DirectionHelper
 {
     public static Direction CheckDirection(Vector3 startingPos, Vector3 checkingPos)
     {
+        return CheckDirection(checkingPos - startingPos);
+
+        /*
         if (startingPos.x < checkingPos.x)
         {
             return Direction.East;
@@ -31,6 +34,7 @@ public static class DirectionHelper
             Debug.LogError("Can't find Direction - Defaulting to North");
             return Direction.North;
         }
+        */
 
     }
 

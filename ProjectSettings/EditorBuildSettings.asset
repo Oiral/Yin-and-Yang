@@ -66,6 +66,12 @@ EditorBuildSettings:
     path: Assets/Scenes/Ice Levels/Level i 8.unity
     guid: d0cdf9e99391f4454b6402ecfee8db04
   - enabled: 1
+    path: Assets/Scenes/Ice Levels/Level i 9.unity
+    guid: 8d940e50266d74a8e9c5530fe5fcfe21
+  - enabled: 1
+    path: Assets/Scenes/Ice Levels/Level i 10.unity
+    guid: d812af4013fbb401195039b484af481a
+  - enabled: 1
     path: Assets/Scenes/Jelly Levels/Level j 1.unity
     guid: ae3b1970d4fcd4d76901243f016dcd09
   - enabled: 1
@@ -86,6 +92,15 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Jelly Levels/Level j 7.unity
     guid: 8c4be7aee237e4870bb47564ac6561c0
+  - enabled: 1
+    path: Assets/Scenes/Jelly Levels/Level j 8.unity
+    guid: 2df946ae74b784712a0358d031878213
+  - enabled: 1
+    path: Assets/Scenes/Jelly Levels/Level j 9.unity
+    guid: fd1adf9f056934e29bcfe5a285ec717a
+  - enabled: 1
+    path: Assets/Scenes/Jelly Levels/Level j 10.unity
+    guid: ad808ca7b7e2748ff891c1e1f8c7fafd
   - enabled: 1
     path: Assets/Scenes/Teleport Levels/Teleport Level 1.unity
     guid: 8482c7a8303134f64828bcf0c7df18e9
@@ -110,6 +125,9 @@ EditorBuildSettings:
   - enabled: 1
     path: Assets/Scenes/Teleport Levels/Teleport Level 8.unity
     guid: 9db0fbdd1eaa14088bcb2005a02b44d9
+  - enabled: 1
+    path: Assets/Scenes/Teleport Levels/Teleport Level 9.unity
+    guid: ae162190487ca408f87204c2212d4b6c
   - enabled: 1
     path: Assets/Scenes/Button Levels/Button 1.unity
     guid: add72e5c7e1e841ddb5c2a63761a3cf9
