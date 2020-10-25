@@ -25,6 +25,8 @@ public class PlayerMovement : MonoBehaviour {
 
     public bool isMainPlayer;
 
+    public Coroutine conveyorRoutine;
+
     private void Start()
     {
         controller = PlayerController.instance;
@@ -47,10 +49,17 @@ public class PlayerMovement : MonoBehaviour {
             return false;
         }
 
+        return ForceMove(dir, primary);
+
+    }
+
+    bool ForceMove(Direction dir, bool primary)
+    {
+
         //targetTile.UpdateConnections();
         foreach (TileConnectionsScript tile in targetTile.connections)
         {
-            
+
             if (DirectionHelper.CheckDirection(targetTile.transform.position, tile.transform.position) == dir)
             {
                 //DisableMovementInput(0.23f);
@@ -117,7 +126,16 @@ public class PlayerMovement : MonoBehaviour {
                         }
                         else
                             Debug.LogError("Missing Tile button on Tile", tile.gameObject);
-                        
+
+                        return true;
+
+                    case TileType.Conveyor:
+                        MovePlayer(tile);
+
+                        if (conveyorRoutine == null)
+                        {
+                            conveyorRoutine = StartCoroutine(MoveOnConveyor(tile, primary));
+                        }
                         return true;
 
                     default:
@@ -135,7 +153,7 @@ public class PlayerMovement : MonoBehaviour {
         PlaySound("Not Move");
         return false;
     }
-    
+
     void MovePlayer(TileConnectionsScript tile)
     {
         targetTile = tile;
@@ -250,4 +268,25 @@ public class PlayerMovement : MonoBehaviour {
             AudioManager.instance.PlaySound(soundName);
         }
     }
+
+    IEnumerator MoveOnConveyor(TileConnectionsScript tile, bool primary)
+    {
+        PlayerController.instance.ToggleMovement(false);
+        //Move to each conveyor tile
+        //We want to recursivly call this function
+        
+        yield return new WaitForSeconds(0.2f);
+
+        while (currentTile.Type == TileType.Conveyor &&
+            ForceMove(DirectionHelper.CheckDirection(currentTile.transform.forward), primary))
+        {
+            LevelController.instance.OnPlayerMove();
+            yield return new WaitForSeconds(0.2f);
+        }
+        conveyorRoutine = null;
+
+        PlayerController.instance.ToggleMovement(true);
+
+    }
 }
+

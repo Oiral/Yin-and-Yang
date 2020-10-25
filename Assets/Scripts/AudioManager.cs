@@ -111,7 +111,7 @@ public class AudioManager : MonoBehaviour
 
     public void Update()
     {
-        Debug.Log(musicSource.isPlaying);
+        //Debug.Log(musicSource.isPlaying);
         if (musicSource.isPlaying == false)
         {
             musicSource.clip = musicTrack[Random.Range(0, musicTrack.Length - 1)];

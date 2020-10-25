@@ -1,0 +1,15 @@
+fileFormatVersion: 2
+guid: 9e27c6434256642c29b6025da0ae0f88
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - topRotatePrefab: {fileID: 2992102229901440444, guid: b719d2224195543bdb176bafd3969b4d,
+      type: 3}
+  - bottomRotatePrefab: {fileID: 2992102229901440444, guid: 8eac013961d8a405cab772859eee5922,
+      type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

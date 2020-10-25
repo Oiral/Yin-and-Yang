@@ -5560,6 +5560,28 @@ Mesh:
     offset: 0
     size: 0
     path: 
+--- !u!1 &736469105 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 3648873940650891331, guid: 5af19d9c5e49041aea697ed1c4e19421,
+    type: 3}
+  m_PrefabInstance: {fileID: 864618503}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &736469106
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 736469105}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9e27c6434256642c29b6025da0ae0f88, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  atStart: 0
+  endPos: {x: 0, y: 0, z: 0}
+  moveTime: 0.3
+  displayTrackPrefab: {fileID: 0}
 --- !u!21 &786152495
 Material:
   serializedVersion: 6
@@ -7718,7 +7740,7 @@ MonoBehaviour:
     type: 3}
   m_PrefabInstance: {fileID: 864618503}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 736469105}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 53c40caa2ae959c4bbe62e9cc7e6f235, type: 3}

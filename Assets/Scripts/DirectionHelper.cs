@@ -34,6 +34,61 @@ public static class DirectionHelper
 
     }
 
+    public static Direction CheckDirection(Vector3 dir)
+    {
+        if (Mathf.Abs(dir.x) > Mathf.Abs(dir.z))
+        {
+            if (dir.x >= 0.1)
+            {
+                //East
+                return Direction.East;
+            }
+            else
+            {
+                //West
+                return Direction.West;
+            }
+        }
+        else
+        {
+            if (dir.z >= 0.1)
+            {
+                //North
+                return Direction.North;
+            }
+            else
+            {
+                //South
+                return Direction.South;
+            }
+        }
+
+        /*
+        if (startingPos.x < checkingPos.x)
+        {
+            return Direction.East;
+        }
+        else if (startingPos.x > checkingPos.x)
+        {
+            return Direction.West;
+        }
+        else if (startingPos.z < checkingPos.z)
+        {
+            return Direction.North;
+        }
+        else if (startingPos.z > checkingPos.z)
+        {
+            return Direction.South;
+        }
+        else
+        {
+            Debug.LogError("Can't find Direction - Defaulting to North");
+            return Direction.North;
+        }
+        */
+
+    }
+
     public static Vector3 VectorFromDir(Direction dir)
     {
         Vector3 vector = Vector3.zero;

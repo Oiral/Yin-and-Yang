@@ -91,6 +91,7 @@ public class BoardManager : MonoBehaviour
     public Material jellyMaterial;
     public Material teleporterMaterial;
     public Material buttonMaterial;
+    public Material conveyorMaterial;
 
     public void ChangeGoalMaterial(bool isOpen)
     {
@@ -122,8 +123,8 @@ public class BoardManager : MonoBehaviour
 
         Material[] rendererMats = tile.visual.GetComponent<MeshRenderer>().sharedMaterials;
 
-        rendererMats[0] = materialToChangeTo;
-        rendererMats[2] = normalMaterial;
+        rendererMats[1] = materialToChangeTo;
+        rendererMats[0] = normalMaterial;
 
         tile.visual.GetComponent<MeshRenderer>().sharedMaterials = rendererMats;
     }
@@ -139,8 +140,8 @@ public class BoardManager : MonoBehaviour
 
         Material[] rendererMats = tile.visual.GetComponent<MeshRenderer>().sharedMaterials;
 
-        rendererMats[0] = materialToChangeTo;
-        rendererMats[2] = secondaryMaterial;
+        rendererMats[1] = materialToChangeTo;
+        rendererMats[0] = secondaryMaterial;
 
         tile.visual.GetComponent<MeshRenderer>().sharedMaterials = rendererMats;
     }
@@ -166,6 +167,10 @@ public class BoardManager : MonoBehaviour
 
             case TileType.Button:
                 ChangeTileMaterial(tile, buttonMaterial);
+                break;
+
+            case TileType.Conveyor:
+                ChangeTileMaterial(tile, conveyorMaterial);
                 break;
 
             default:

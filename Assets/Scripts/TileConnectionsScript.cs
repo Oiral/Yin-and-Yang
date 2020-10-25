@@ -2,6 +2,11 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+
+#if UNITY_EDITOR
+using UnityEditor;
+#endif
+
 //public enum TileSide {Top, Bottom };
 
 public class TileConnectionsScript : MonoBehaviour {
@@ -16,6 +21,7 @@ public class TileConnectionsScript : MonoBehaviour {
 
     public LayerMask layerMask;
 
+#if UNITY_EDITOR
     private void OnDrawGizmosSelected()
     {
         if (connections.Count > 0)
@@ -45,7 +51,22 @@ public class TileConnectionsScript : MonoBehaviour {
         */       
 
         UpdateConnections();
+
+        TileScript tileParent = GetComponentInParent<TileScript>();
+        if (tileParent.Type == TileType.Conveyor)
+        {
+            Gizmos.color = Color.red;
+            //Lets draw a line in the direction that this will go
+
+            var p1 = tileParent.transform.position;
+            var p2 = tileParent.transform.position +
+                DirectionHelper.VectorFromDir(DirectionHelper.CheckDirection(tileParent.transform.forward))
+                ;
+            var thickness = 3;
+            Handles.DrawBezier(p1, p2, p1, p2, Color.red, null, thickness);
+        }
     }
+#endif
 
     private Vector3 Average(Vector3 pos1, Vector3 pos2)
     {

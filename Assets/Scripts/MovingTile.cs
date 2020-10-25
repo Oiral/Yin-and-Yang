@@ -63,8 +63,6 @@ public class MovingTile : MonoBehaviour
         LevelController.instance.CheckAllKeysOnPlayer();
         moving = false;
         PlayerController.instance.ToggleMovement(true);
-
-
     }
 
     private void OnDrawGizmos()
