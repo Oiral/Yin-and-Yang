@@ -9,6 +9,7 @@ public class LevelSelection : MonoBehaviour
 {
     public GameObject levelButtonPrefab;
     public GameObject lockedButtonPrefab;
+    public GameObject fillerPrefab;
 
     public LevelManagerScript levelManager;
 
@@ -41,6 +42,7 @@ public class LevelSelection : MonoBehaviour
                 previousLevelCompleted = false;
             }
 
+            Instantiate(fillerPrefab, transform);
 
         }
 
