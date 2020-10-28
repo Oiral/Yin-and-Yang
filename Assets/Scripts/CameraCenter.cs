@@ -8,58 +8,79 @@ public class CameraCenter : MonoBehaviour
 
     Vector3 pos;
 
-    // Start is called before the first frame update
-    void Start()
+    private void Update()
     {
-        //Debug.LogError("Stopping first");
-        BoardManager manager = GameObject.FindWithTag("Board").GetComponent<BoardManager>();
+        transform.position = pos;// + offset;
 
-        pos = transform.position;
+        SetCameraPos();
+        SetCameraWidth();
+    }
 
-        if (manager == null)
-        {
+
+    void SetCameraWidth()
+    {
+        if (smallesPos == null && biggestPos == null)
             return;
-        }
-        //Target Position
+
+        float distance = Vector3.Distance(smallesPos.transform.position, biggestPos.transform.position);
+
+        distance += 2f;
+
+        distance = Mathf.Max(distance, 3f);
+
+
+        float screenAspect = (float)Screen.width / (float)Screen.height;
+
+        float camHalfWidth = distance * 0.5f;
+        float camHalfHeight = camHalfWidth / screenAspect;
+        GetComponentInChildren<Camera>().orthographicSize = camHalfHeight;
+    }
+
+    void SetCameraPos()
+    {
+        BoardManager manager = BoardManager.instance;
+
         float averageY = 0f;
 
-        float maxX = 0f;
-
-        float minX = 0f;
-
-        float maxZ = 0f;
-
-        float minZ = 0f;
+        smallesPos = manager.tiles[0].transform;
+        biggestPos = manager.tiles[0].transform;
 
         foreach (TileScript item in manager.tiles)
         {
-            if (item.transform.position.x > maxX)
+            if (GetPositionScore(item.transform.position) <= GetPositionScore(smallesPos.position))
             {
-                maxX = item.transform.position.x;
-            }
-            if (item.transform.position.x < minX)
-            {
-                minX = item.transform.position.x;
-            }
-            if (item.transform.position.z > maxZ)
-            {
-                maxZ = item.transform.position.z;
-            }
-            if (item.transform.position.z < minZ)
-            {
-                minZ = item.transform.position.z;
+                smallesPos = item.transform;
             }
 
+            if (GetPositionScore(item.transform.position) >= GetPositionScore(biggestPos.position))
+            {
+                biggestPos = item.transform;
+            }
             averageY += item.transform.localPosition.y;
         }
 
         averageY /= manager.tiles.Count;
-        pos = new Vector3((maxX + minX) / 2, averageY, (maxZ + minZ) / 2);
+        pos = new Vector3((smallesPos.position.x + biggestPos.position.x) / 2, averageY, (smallesPos.position.z + biggestPos.position.z) / 2);
 
     }
 
-    private void Update()
+    float GetPositionScore(Vector3 checkPos)
     {
-        transform.position = pos + offset;
+        return (checkPos.x - checkPos.z);
     }
+
+    Transform smallesPos;
+    Transform biggestPos;
+         
+    /*
+    private void OnDrawGizmos()
+    {
+        if (testingObject1 != null && testingObject2 != null)
+        {
+            Gizmos.color = Color.red;
+            Gizmos.DrawLine(testingObject1.position, testingObject2.position);
+            //Debug.Log(Vector3.Distance(testingObject1.transform.position, testingObject2.transform.position));
+        }
+    }
+    */
 }
