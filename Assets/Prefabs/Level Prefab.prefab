@@ -604,7 +604,7 @@ MonoBehaviour:
   currentTile: {fileID: 0}
   splashPrefab: {fileID: 0}
   winParticlePrefab: {fileID: 0}
-  turtleAnimator: {fileID: 0}
+  turtleAnimator: {fileID: 7615856926703951998}
   levelManager: {fileID: 0}
   canMove: 1
   moveSpeed: 0.2

@@ -146,4 +146,14 @@ public class PlayerController : MonoBehaviour {
             key.canMove = false;
         }
     }
+
+    public void MassAnimation(string animationName)
+    {
+        playerMoveScript.Animate(animationName);
+
+        foreach (PlayerMovement key in keyMoveScripts)
+        {
+            key.Animate(animationName);
+        }
+    }
 }

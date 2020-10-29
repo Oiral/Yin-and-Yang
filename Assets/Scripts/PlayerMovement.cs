@@ -101,7 +101,7 @@ public class PlayerMovement : MonoBehaviour {
 
                     case TileType.Ice:
                         MovePlayer(tile);
-                        MovePlayer(dir, primary);
+                        ForceMove(dir, primary);
                         return true;
 
                     case TileType.Jelly:
@@ -215,7 +215,7 @@ public class PlayerMovement : MonoBehaviour {
         transform.LookAt(lookPos,Vector3.up);
     }
 
-    void Animate(string movement)
+   public void Animate(string movement)
     {
         if (turtleAnimator != null)
         {
@@ -280,6 +280,7 @@ public class PlayerMovement : MonoBehaviour {
         while (currentTile.Type == TileType.Conveyor &&
             ForceMove(DirectionHelper.CheckDirection(currentTile.transform.forward), primary))
         {
+            //Debug.Log(DirectionHelper.CheckDirection(currentTile.transform.forward));
             LevelController.instance.OnPlayerMove();
             yield return new WaitForSeconds(0.2f);
         }

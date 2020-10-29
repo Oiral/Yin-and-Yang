@@ -163,7 +163,7 @@ public class TileConnectionsScript : MonoBehaviour {
             //Ray cast to see if there is a barrier in the way of this connection
             if (Physics.Linecast(transform.position, connections[i].transform.position, layerMask))
             {
-                Debug.Log("Something blocked the connection");
+                //Debug.Log("Something blocked the connection");
                 if (connections[i].connections.Contains(this))
                 {
                     connections[i].connections.Remove(this);

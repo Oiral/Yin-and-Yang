@@ -65,10 +65,14 @@ public class LevelManagerScript : MonoBehaviour {
 
     IEnumerator WaitForNextLevel()
     {
-        SaveScore(PlayerController.instance.moveCount);
-
         AudioManager.instance.PlaySound("Win");
-        yield return new WaitForSeconds(waitTime * 0.8f);
+        yield return new WaitForSeconds(waitTime * 0.1f);
+
+        PlayerController.instance.MassAnimation("Win");
+
+        yield return new WaitForSeconds(waitTime * 0.7f);
+
+        SaveScore(PlayerController.instance.moveCount);
         //FindBoard
         if (GameObject.FindGameObjectWithTag("Board") != null)
         {
