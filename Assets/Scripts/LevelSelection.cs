@@ -46,7 +46,25 @@ public class LevelSelection : MonoBehaviour
 
         }
 
+        Vector2 size = GetComponent<RectTransform>().sizeDelta;
+
+        Vector2 cellSize = GetComponent<GridLayoutGroup>().cellSize;
+
+        Vector2 spacing = GetComponent<GridLayoutGroup>().spacing;
+
+        float count = SceneManager.sceneCountInBuildSettings;
+
+        count = (count * 0.3f) * 2f;
+
+        Mathf.Ceil(count);
+
+        size.y = (cellSize.y/* + spacing.y*/) * count;
+
+        GetComponent<RectTransform>().sizeDelta = size;
+
     }
+
+    
 
     public bool LevelCompleted(string sceneName)
     {
