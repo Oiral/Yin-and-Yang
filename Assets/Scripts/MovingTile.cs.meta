@@ -6,7 +6,7 @@ MonoImporter:
   defaultReferences:
   - displayTrackPrefab: {fileID: 5647479411087589535, guid: 1924d2c2018be48d6aec6e300e49f0d9,
       type: 3}
-  executionOrder: 550
+  executionOrder: 650
   icon: {instanceID: 0}
   userData: 
   assetBundleName: 

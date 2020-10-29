@@ -122,7 +122,7 @@ public class PlayerMovement : MonoBehaviour {
                         MovePlayer(tile);
                         if (tile.GetComponentInParent<TileButton>() != null)
                         {
-                            tile.GetComponentInParent<TileButton>().steppedOnEvent.Invoke();
+                            tile.GetComponentInParent<TileButton>().SteppedOn();
                         }
                         else
                             Debug.LogError("Missing Tile button on Tile", tile.gameObject);

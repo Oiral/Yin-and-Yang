@@ -46,19 +46,30 @@ public class LevelSelection : MonoBehaviour
 
         }
 
+
+        //Lets adjust the size of the area
+
+
+        GridLayoutGroup layoutGroup = GetComponent<GridLayoutGroup>();
+
         Vector2 size = GetComponent<RectTransform>().sizeDelta;
 
-        Vector2 cellSize = GetComponent<GridLayoutGroup>().cellSize;
+        Vector2 cellSize = layoutGroup.cellSize;
 
-        Vector2 spacing = GetComponent<GridLayoutGroup>().spacing;
+        Vector2 spacing = layoutGroup.spacing;
+
 
         float count = SceneManager.sceneCountInBuildSettings;
 
-        count = (count * 0.3f) * 2f;
+        count = (count / 3) * 2f;
 
         Mathf.Ceil(count);
 
-        size.y = (cellSize.y/* + spacing.y*/) * count;
+        size.y = (cellSize.y + spacing.y) * count;
+
+        size.y += layoutGroup.padding.bottom;
+
+        size.y += layoutGroup.padding.top;
 
         GetComponent<RectTransform>().sizeDelta = size;
 

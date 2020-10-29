@@ -166,7 +166,17 @@ public class BoardManager : MonoBehaviour
                 break;
 
             case TileType.Button:
-                ChangeTileMaterial(tile, buttonMaterial);
+
+                TileButton button = tile.GetComponent<TileButton>();
+                if (button != null && button.buttonMaterial != null)
+                {
+                    ChangeTileMaterial(tile, button.buttonMaterial);
+                }
+                else
+                {
+                    ChangeTileMaterial(tile, buttonMaterial);
+                }
+
                 break;
 
             case TileType.Conveyor:

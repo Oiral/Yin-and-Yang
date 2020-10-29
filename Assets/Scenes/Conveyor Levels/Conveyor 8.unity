@@ -7034,7 +7034,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-720824
+  m_Name: pb_Mesh-771616
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -7906,7 +7906,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh-720808
+  m_Name: pb_Mesh-771564
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -8464,21 +8464,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 60468b7c962cc4222aac13c30c4fcfc8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  steppedOnEvent:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 61559683}
-        m_TargetAssemblyTypeName: MovingTile, Assembly-CSharp
-        m_MethodName: ButtonSteppedOn
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+  movingTiles:
+  - {fileID: 61559683}
+  rotatingTiles: []
+  buttonMaterial: {fileID: 0}
 --- !u!114 &993051388 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 3648873940650891389, guid: 5af19d9c5e49041aea697ed1c4e19421,

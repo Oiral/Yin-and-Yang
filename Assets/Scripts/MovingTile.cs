@@ -84,6 +84,8 @@ public class MovingTile : MonoBehaviour
         GameObject spawnedPrefab = Instantiate(displayTrackPrefab, transform.position + offset, Quaternion.identity,BoardManager.instance.transform);
         spawnedPrefab.transform.LookAt(endPos + offset);
 
+        GetComponent<TileScript>().tileAdditionalVisual = spawnedPrefab;
+
         Vector3 scale = spawnedPrefab.transform.localScale;
         scale.y = Vector3.Distance(startingPos, endPos);
 

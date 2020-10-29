@@ -8,7 +8,7 @@ MonoImporter:
       type: 3}
   - bottomRotatePrefab: {fileID: 2992102229901440444, guid: 8eac013961d8a405cab772859eee5922,
       type: 3}
-  executionOrder: 0
+  executionOrder: 700
   icon: {instanceID: 0}
   userData: 
   assetBundleName: 

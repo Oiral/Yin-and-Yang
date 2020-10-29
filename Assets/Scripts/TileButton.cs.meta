@@ -3,8 +3,9 @@ guid: 60468b7c962cc4222aac13c30c4fcfc8
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences: []
-  executionOrder: 0
+  defaultReferences:
+  - buttonMaterial: {fileID: 2100000, guid: 4c77f35b4ce3641ae89a11be37022ce9, type: 2}
+  executionOrder: 800
   icon: {instanceID: 0}
   userData: 
   assetBundleName: 

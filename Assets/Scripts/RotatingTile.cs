@@ -76,8 +76,11 @@ public class RotatingTile : MonoBehaviour
 
         //Vector3 offset = Vector3.up * 0.4f;
 
+
         GameObject spawnedPrefab = Instantiate(prefabToSpawn, transform.position, Quaternion.identity, BoardManager.instance.transform);
         //spawnedPrefab.transform.LookAt(endPos + offset);
+
+        GetComponent<TileScript>().tileAdditionalVisual = spawnedPrefab;
 
         /*
         Vector3 scale = spawnedPrefab.transform.localScale;
