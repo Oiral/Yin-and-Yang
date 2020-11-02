@@ -110,7 +110,7 @@ GameObject:
   - component: {fileID: 1157581255419061635}
   m_Layer: 0
   m_Name: Main Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -14807,7 +14807,7 @@ PrefabInstance:
     - target: {fileID: 3648873941780566741, guid: 5af19d9c5e49041aea697ed1c4e19421,
         type: 3}
       propertyPath: connections.Array.size
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 3648873941780566741, guid: 5af19d9c5e49041aea697ed1c4e19421,
         type: 3}
