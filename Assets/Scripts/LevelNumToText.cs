@@ -8,7 +8,7 @@ public class LevelNumToText : MonoBehaviour
 {
     private void Start()
     {
-        Debug.Log(SceneManager.GetActiveScene().buildIndex);
+        //Debug.Log(SceneManager.GetActiveScene().buildIndex);
 
         int levelNum = SceneManager.GetActiveScene().buildIndex;
 
