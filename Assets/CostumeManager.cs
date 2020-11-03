@@ -12,9 +12,9 @@ public class CostumeManager : MonoBehaviour, ISerializationCallbackReceiver
     [SerializeField]
     public Dictionary<string, PlayerMaterial> playerColours = new Dictionary<string, PlayerMaterial>();
 
-    List<string> savedMaterials = new List<string>();
+    List<string> unlockedMaterials = new List<string>();
 
-    public void ChangePlayerMaterial(string materialName)
+    void ChangePlayerMaterial(string materialName)
     {
         SaveToPrefs();
 
@@ -55,6 +55,7 @@ public class CostumeManager : MonoBehaviour, ISerializationCallbackReceiver
 
         DontDestroyOnLoad(gameObject);
         SceneManager.sceneLoaded += OnSceneLoaded;
+        GetFromPrefs();
     }
 
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
@@ -78,12 +79,12 @@ public class CostumeManager : MonoBehaviour, ISerializationCallbackReceiver
         if (playerColours.ContainsKey(materialName)) 
             return;
 
-        savedMaterials.Add(materialName);
+        unlockedMaterials.Add(materialName);
 
         SaveToPrefs();
     }
 
-    public void GetFromPrefs()
+    void GetFromPrefs()
     {
         string savedString = "";
 
@@ -93,10 +94,10 @@ public class CostumeManager : MonoBehaviour, ISerializationCallbackReceiver
             savedString = PlayerPrefs.GetString(playerPrefsKey);
         }
 
-        savedMaterials = new List<string>();
+        unlockedMaterials = new List<string>();
         foreach (string matName in savedString.Split('/'))
         {
-            savedMaterials.Add(matName);
+            unlockedMaterials.Add(matName);
         }
 
         //Set the current tile to what has been set
@@ -112,7 +113,7 @@ public class CostumeManager : MonoBehaviour, ISerializationCallbackReceiver
 
     public void SetSelected(string matName)
     {
-        if (savedMaterials.Contains(matName))
+        if (playerColours.ContainsKey(matName))
         {
             //If the saved materials contains this name, We can save it
             selectedMaterial = matName;
@@ -122,13 +123,15 @@ public class CostumeManager : MonoBehaviour, ISerializationCallbackReceiver
             //Otherwise lets set it to the first in the order
             selectedMaterial = "Grey";
         }
+
+        ChangePlayerMaterial(selectedMaterial);
     }
 
-    public void SaveToPrefs()
+    void SaveToPrefs()
     {
         string namesToSave = "";
 
-        foreach (string item in savedMaterials)
+        foreach (string item in unlockedMaterials)
         {
             namesToSave += item + "/";
         }

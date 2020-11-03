@@ -10,6 +10,6 @@ public class ShopSelectionButton : MonoBehaviour
 
     public void SelectItem()
     {
-        CostumeManager.instance.ChangePlayerMaterial(itemName.text);
+        CostumeManager.instance.SetSelected(itemName.text);
     }
 }
