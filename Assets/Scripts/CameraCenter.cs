@@ -8,12 +8,20 @@ public class CameraCenter : MonoBehaviour
 
     Vector3 pos;
 
-    private void Update()
+    private void Start()
     {
         transform.position = pos;// + offset;
 
         SetCameraPos();
         SetCameraWidth();
+    }
+
+    private void Update()
+    {
+        //transform.position = pos;// + offset;
+
+        //SetCameraPos();
+        //SetCameraWidth();
     }
 
 
