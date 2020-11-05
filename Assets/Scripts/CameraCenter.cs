@@ -10,10 +10,10 @@ public class CameraCenter : MonoBehaviour
 
     private void Start()
     {
-        transform.position = pos;// + offset;
-
         SetCameraPos();
         SetCameraWidth();
+
+        transform.position = pos;// + offset;
     }
 
     private void Update()
