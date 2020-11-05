@@ -283,6 +283,11 @@ public class PlayerMovement : MonoBehaviour {
             //Debug.Log(DirectionHelper.CheckDirection(currentTile.transform.forward));
             LevelController.instance.OnPlayerMove();
             yield return new WaitForSeconds(0.2f);
+            if (LevelController.instance.CheckAllKeysOnPlayer())
+            {
+                //Just incase we run into a player or a key when moving and the next step is the goal, We want to stop movement
+                break;
+            }
         }
         conveyorRoutine = null;
 
