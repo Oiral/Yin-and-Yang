@@ -141,6 +141,11 @@ public class CostumeManager : MonoBehaviour, ISerializationCallbackReceiver
         PlayerPrefs.SetString(playerPrefsKey + "Selected", selectedMaterial);
     }
 
+    void GetUnlocked()
+    {
+
+    }
+
     #endregion
 
     #region Serialise Dictionary
