@@ -8,8 +8,11 @@ public class ShopSelectionButton : MonoBehaviour
     public Image visualImage;
     public Text itemName;
 
+    public ShopSelection shop;
+
     public void SelectItem()
     {
         CostumeManager.instance.SetSelected(itemName.text);
+        shop.currentlySelectedColourTransform = transform;
     }
 }

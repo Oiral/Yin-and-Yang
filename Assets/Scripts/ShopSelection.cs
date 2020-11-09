@@ -9,7 +9,10 @@ public class ShopSelection : MonoBehaviour
     public GameObject shopButtonPrefab;
     public GameObject fillerPrefab;
 
+    public Transform currentlySelectedColourTransform;
+    public GameObject currentlySelectedColourObject;
 
+    public float moveSpeed = 5f;
 
     private void Start()
     {
@@ -23,6 +26,15 @@ public class ShopSelection : MonoBehaviour
 
             button.itemName.text = costumeCol.Key;
             button.visualImage.color = costumeCol.Value.material.color;
+
+            button.shop = this;
+
+            //If this is currently selected colour
+            if (button.itemName.text == costumes.selectedMaterial)
+            {
+                currentlySelectedColourTransform = spawnedButton.transform;
+                currentlySelectedColourObject.transform.position = spawnedButton.transform.position;
+            }
 
             Instantiate(fillerPrefab, transform);
         }
@@ -50,6 +62,16 @@ public class ShopSelection : MonoBehaviour
         size.y += layoutGroup.padding.top;
 
         GetComponent<RectTransform>().sizeDelta = size;
+
+    }
+
+    private void Update()
+    {
+        currentlySelectedColourObject.transform.position = Vector3.Lerp(
+                                    currentlySelectedColourObject.transform.position,
+                                    currentlySelectedColourTransform.position,
+                                    moveSpeed * Time.deltaTime);
+
 
     }
 }

@@ -61,7 +61,7 @@ public class CostumeManager : MonoBehaviour, ISerializationCallbackReceiver
     void OnSceneLoaded(Scene scene, LoadSceneMode mode)
     {
         //Debug.Log("Test");
-        ChangePlayerMaterial(selectedMaterial);
+        GetSelected();
     }
 
     private void OnDisable()
@@ -100,6 +100,11 @@ public class CostumeManager : MonoBehaviour, ISerializationCallbackReceiver
             unlockedMaterials.Add(matName);
         }
 
+        GetSelected();
+    }
+
+    public void GetSelected()
+    {
         //Set the current tile to what has been set
         if (PlayerPrefs.HasKey(playerPrefsKey + "Selected"))
         {
