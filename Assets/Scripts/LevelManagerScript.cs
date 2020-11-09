@@ -137,4 +137,13 @@ public class LevelManagerScript : MonoBehaviour {
             PlayerPrefs.SetInt(SceneManager.GetActiveScene().name, score);
         }
     }
+
+    /// <summary>
+    /// Only call this if the player really wants to reset - please double check
+    /// </summary>
+    public void ResetEverything()
+    {
+        PlayerPrefs.DeleteAll();
+        LoadMainMenu();
+    }
 }

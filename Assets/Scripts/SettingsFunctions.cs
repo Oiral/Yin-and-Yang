@@ -46,4 +46,5 @@ public class SettingsFunctions : MonoBehaviour
         //We need to change the visuals of the button
         sfxButtonImage.sprite = state ? soundOnImage : soundOffImage;
     }
+
 }
