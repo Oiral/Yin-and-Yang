@@ -14523,7 +14523,7 @@ MonoBehaviour:
     type: 3}
   currentlySelectedColourTransform: {fileID: 0}
   currentlySelectedColourObject: {fileID: 1956306196}
-  moveSpeed: 0.1
+  moveSpeed: 10
 --- !u!114 &898992856
 MonoBehaviour:
   m_ObjectHideFlags: 0
