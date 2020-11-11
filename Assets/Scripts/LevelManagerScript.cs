@@ -75,10 +75,9 @@ public class LevelManagerScript : MonoBehaviour {
 
         SaveScore(PlayerController.instance.moveCount);
         //FindBoard
-        if (GameObject.FindGameObjectWithTag("Board") != null)
+        if (GameObject.FindGameObjectWithTag("MainCamera") != null)
         {
-            RotateBoard board = GameObject.FindGameObjectWithTag("Board").GetComponent<RotateBoard>();
-            board.targetPos = new Vector3(0, 15, 0);
+            GameObject.FindGameObjectWithTag("MainCamera").GetComponent<RotateBoard>().targetHeight = 15;
         }
 
 

@@ -8,7 +8,7 @@ public class CameraCenter : MonoBehaviour
 
     Vector3 pos;
 
-    private void Start()
+    private void OnEnable()
     {
         SetCameraPos();
         SetCameraWidth();

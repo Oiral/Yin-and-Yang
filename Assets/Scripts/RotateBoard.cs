@@ -8,19 +8,20 @@ using UnityEngine.SceneManagement;
 public class RotateBoard : MonoBehaviour {
 
     //public AnimationCurve rotationColourCurve;
-    public Vector3 targetPos = new Vector3(0,0,0);
+    public float targetHeight = 0;
     //public Material backGroundMaterial;
     //public Button rotateButton;
     //public float waitTime = 1;
     //[Range(10, 50)]
     //public float framesOfRotation = 10;
+    public float moveSpeed = 0.1f;
 
     //float cRI;
     private void Start()
     {
         //cRI = 0;
         //backGroundMaterial.SetFloat("_DayNight", cRI);
-        transform.position -= Vector3.up * 15;
+        transform.position += new Vector3(0, -15, 0);
     }
 
     /*
@@ -76,7 +77,10 @@ public class RotateBoard : MonoBehaviour {
 
     private void Update()
     {
-        transform.position = Vector3.Lerp(transform.position, targetPos, 0.1f);
+        Vector3 targetPos = transform.position;
+        targetPos.y = targetHeight;
+
+        transform.position = Vector3.Lerp(transform.position, targetPos, moveSpeed * Time.deltaTime);
         if (Vector3.Distance(transform.position, targetPos) < 0.02f)
         {
             transform.position = targetPos;
