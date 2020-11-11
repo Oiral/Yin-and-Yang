@@ -5,7 +5,13 @@ using UnityEngine;
 public class MoneyManager : MonoBehaviour
 {
     string playerPrefsMoneyID = "MoneyCount";
+    [ReadOnly]
     public int moneyCount;
+
+    private void Start()
+    {
+        LoadMoney();
+    }
 
     public void GainMoney(int amount)
     {
@@ -18,6 +24,7 @@ public class MoneyManager : MonoBehaviour
         {
             moneyCount += amount;
         }
+        SaveMoney();
     }
 
     public bool PurchaseItem(int amount)
@@ -25,6 +32,7 @@ public class MoneyManager : MonoBehaviour
         if (CanPurchase(amount))
         {
             moneyCount -= amount;
+            SaveMoney();
             return true;
         }
         else
@@ -68,5 +76,29 @@ public class MoneyManager : MonoBehaviour
             moneyCount = 0;
         }
     }
+    #endregion
+
+
+    [ContextMenu("Reset Money")]
+    public void ResetMoney()
+    {
+        moneyCount = 0;
+        SaveMoney();
+    }
+
+    #region Singleton
+
+    public static MoneyManager instance;
+    private void Awake()
+    {
+        if (instance == null)
+        {
+            instance = this;
+        }else if (instance != this)
+        {
+            Destroy(this);
+        }
+    }
+
     #endregion
 }

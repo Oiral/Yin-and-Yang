@@ -8,15 +8,21 @@ public class ShopSelection : MonoBehaviour
 {
     public GameObject shopButtonPrefab;
     public GameObject fillerPrefab;
+    public GameObject modelButtonPrefab;
 
     public Transform currentlySelectedColourTransform;
     public GameObject currentlySelectedColourObject;
+
+    public Transform currentlySelectedModelTransform;
+    public GameObject currentlySelectedModelObject;
 
     public float moveSpeed = 5f;
 
     private void Start()
     {
         CostumeManager costumes = CostumeManager.instance;
+
+        int count = 0;
 
         foreach (var costumeCol in costumes.playerColours)
         {
@@ -37,8 +43,57 @@ public class ShopSelection : MonoBehaviour
             }
 
             Instantiate(fillerPrefab, transform);
+            count ++;
         }
 
+        count += 3;
+        Instantiate(fillerPrefab, transform);
+        Instantiate(fillerPrefab, transform);
+        Instantiate(fillerPrefab, transform);
+
+        foreach (var costumeModel in costumes.playerModels)
+        {
+            GameObject spawnedButton = Instantiate(modelButtonPrefab, transform);
+
+            ShopSelectionButton button = spawnedButton.GetComponent<ShopSelectionButton>();
+
+            button.itemName.text = costumeModel.Key;
+            button.visualImage.color = new Color(0, 0, 0, 0);
+
+            button.shop = this;
+
+            //If this is currently selected colour
+            if (button.itemName.text == costumes.selectedModel)
+            {
+                currentlySelectedModelTransform = spawnedButton.transform;
+                currentlySelectedModelObject.transform.position = spawnedButton.transform.position;
+            }
+
+            Instantiate(fillerPrefab, transform);
+            count ++;
+        }
+
+        ChangeHeight(count);
+
+    }
+
+    private void Update()
+    {
+        currentlySelectedColourObject.transform.position = Vector3.Lerp(
+                                    currentlySelectedColourObject.transform.position,
+                                    currentlySelectedColourTransform.position,
+                                    moveSpeed * Time.deltaTime);
+
+        currentlySelectedModelObject.transform.position = Vector3.Lerp(
+                                    currentlySelectedModelObject.transform.position,
+                                    currentlySelectedModelTransform.position,
+                                    moveSpeed * Time.deltaTime);
+
+
+    }
+
+    void ChangeHeight(int cellcount)
+    {
         //Lets adjust the size of the area
         GridLayoutGroup layoutGroup = GetComponent<GridLayoutGroup>();
 
@@ -49,7 +104,7 @@ public class ShopSelection : MonoBehaviour
         Vector2 spacing = layoutGroup.spacing;
 
 
-        float count = costumes.playerColours.Count;
+        float count = cellcount;
 
         count = (count / 3) * 2f;
 
@@ -62,16 +117,5 @@ public class ShopSelection : MonoBehaviour
         size.y += layoutGroup.padding.top;
 
         GetComponent<RectTransform>().sizeDelta = size;
-
-    }
-
-    private void Update()
-    {
-        currentlySelectedColourObject.transform.position = Vector3.Lerp(
-                                    currentlySelectedColourObject.transform.position,
-                                    currentlySelectedColourTransform.position,
-                                    moveSpeed * Time.deltaTime);
-
-
     }
 }

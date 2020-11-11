@@ -58,6 +58,7 @@ public class LevelManagerScript : MonoBehaviour {
         }else
         {
             StartCoroutine(WaitForNextLevel());
+
         }
 
         
@@ -81,6 +82,12 @@ public class LevelManagerScript : MonoBehaviour {
         }
 
 
+        if (currentLevel +1 == SceneManager.sceneCountInBuildSettings)
+        {
+            yield return new WaitForSeconds(waitTime * 0.2f);
+            LoadMainMenu();
+            yield break;
+        }
 
         yield return new WaitForSeconds(waitTime * 0.2f);
 
@@ -93,10 +100,7 @@ public class LevelManagerScript : MonoBehaviour {
         }
         //Reaches this point when its loaded
         //SceneManager.UnloadSceneAsync(currentLevel - 1);
-        if (currentLevel == SceneManager.sceneCountInBuildSettings-1)
-        {
-            UIScript.instance.SetWinMenu(true);
-        }
+
     }
 
     public void LoadMainMenu()

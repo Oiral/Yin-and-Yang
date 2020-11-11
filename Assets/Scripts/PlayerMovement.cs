@@ -87,6 +87,10 @@ public class PlayerMovement : MonoBehaviour {
                             //SoundManager.instance.PlaySound("win");
                             if (isMainPlayer)
                             {
+                                //We have won
+                                if (MoneyManager.instance !=null)
+                                    MoneyManager.instance.GainMoney(1);
+
                                 levelManager.NextLevel();
                             }
                             return true;

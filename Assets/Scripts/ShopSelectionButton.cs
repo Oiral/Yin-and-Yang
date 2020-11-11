@@ -12,7 +12,14 @@ public class ShopSelectionButton : MonoBehaviour
 
     public void SelectItem()
     {
-        CostumeManager.instance.SetSelected(itemName.text);
+        CostumeManager.instance.SetSelectedMaterial(itemName.text);
         shop.currentlySelectedColourTransform = transform;
+    }
+
+    public void SelectModel()
+    {
+        CostumeManager.instance.SetSelectedModel(itemName.text);
+
+        shop.currentlySelectedModelTransform = transform;
     }
 }
