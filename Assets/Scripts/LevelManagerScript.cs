@@ -11,6 +11,7 @@ public class LevelManagerScript : MonoBehaviour {
 
     public float waitTime = 2f;
 
+    public static string PrefsCurrentLevelKey = "CurrentLevel";
     /*
     private void Start()
     {
@@ -60,7 +61,6 @@ public class LevelManagerScript : MonoBehaviour {
             StartCoroutine(WaitForNextLevel());
 
         }
-
         
     }
 
@@ -80,10 +80,12 @@ public class LevelManagerScript : MonoBehaviour {
             GameObject.FindGameObjectWithTag("MainCamera").GetComponent<RotateBoard>().targetHeight = 15;
         }
 
+        PlayerPrefs.SetInt(PrefsCurrentLevelKey, currentLevel + 1);
 
-        if (currentLevel +1 == SceneManager.sceneCountInBuildSettings)
+        if (currentLevel + 1 == SceneManager.sceneCountInBuildSettings)
         {
             yield return new WaitForSeconds(waitTime * 0.2f);
+            PlayerPrefs.DeleteKey(PrefsCurrentLevelKey);
             LoadMainMenu();
             yield break;
         }
@@ -91,6 +93,8 @@ public class LevelManagerScript : MonoBehaviour {
         yield return new WaitForSeconds(waitTime * 0.2f);
 
         AsyncOperation asyncLoad = SceneManager.LoadSceneAsync(currentLevel += 1);
+
+        
 
         // Wait until the asynchronous scene fully loads
         while (!asyncLoad.isDone)
@@ -148,5 +152,17 @@ public class LevelManagerScript : MonoBehaviour {
     {
         PlayerPrefs.DeleteAll();
         LoadMainMenu();
+    }
+
+    public void Contine()
+    {
+        int sceneNum = 1;
+
+        if (PlayerPrefs.HasKey(PrefsCurrentLevelKey))
+        {
+            sceneNum = PlayerPrefs.GetInt(PrefsCurrentLevelKey);
+        }
+
+        SceneManager.LoadScene(sceneNum);
     }
 }
