@@ -303,10 +303,12 @@ public class PlayerMaterial
 {
     public Material material;
     public bool unlocked;
+    public int cost;
 
-    public PlayerMaterial(Material mat)
+    public PlayerMaterial(Material mat, int newCost)
     {
         material = mat;
+        cost = newCost;
     }
     public PlayerMaterial()
     {
@@ -319,10 +321,12 @@ public class PlayerModel
 {
     public GameObject modelPrefab;
     public bool unlocked;
+    public int cost;
 
-    public PlayerModel(GameObject prefab)
+    public PlayerModel(GameObject prefab, int newCost)
     {
         modelPrefab = prefab;
+        cost = newCost;
     }
     public PlayerModel()
     {

@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 1264269771927195671}
   - component: {fileID: 4280518376095573294}
   - component: {fileID: 6937400390684328017}
-  m_Layer: 0
+  m_Layer: 12
   m_Name: Top Hat
   m_TagString: Untagged
   m_Icon: {fileID: 0}

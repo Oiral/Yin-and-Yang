@@ -7,8 +7,11 @@ using UnityEditor;
 [CustomEditor(typeof(CostumeManager))]
 public class CostumeManagerEditor : Editor
 {
-    bool materialFoldedOut;
-    bool modelFoldedOut;
+    public static bool materialFoldedOut;
+    public static bool modelFoldedOut;
+
+    float numberWidth = 40f;
+    float nameWidth = 100f;
 
     public override void OnInspectorGUI()
     {
@@ -26,18 +29,34 @@ public class CostumeManagerEditor : Editor
         {
             Dictionary<string, PlayerMaterial> playerColours = new Dictionary<string, PlayerMaterial>();
 
+            GUILayout.BeginHorizontal();
+
+            GUILayout.Label("Name", GUILayout.Width(nameWidth));
+            GUILayout.Label("Cost", GUILayout.Width(numberWidth));
+            GUILayout.Label("Material");
+
+            GUILayout.EndHorizontal();
+
             foreach (var costumeMaterial in manager.playerColours)
             {
                 GUILayout.BeginHorizontal();
 
                 string testName = costumeMaterial.Key;
 
-                string materialName = GUILayout.TextField(costumeMaterial.Key);
+                PlayerMaterial editingMaterial = costumeMaterial.Value;
 
-                Material testMaterial = costumeMaterial.Value.material;
-                Material materialMat = (Material)EditorGUILayout.ObjectField(costumeMaterial.Value.material, typeof(Material), GUILayout.MinWidth(100f), GUILayout.MaxWidth(200f));
 
-                playerColours.Add(materialName, new PlayerMaterial(materialMat));
+                
+
+                string materialName = GUILayout.TextField(costumeMaterial.Key, GUILayout.Width(nameWidth));
+
+                editingMaterial.cost = EditorGUILayout.IntField(editingMaterial.cost, GUILayout.Width(numberWidth));
+
+                editingMaterial.material = (Material)EditorGUILayout.ObjectField(costumeMaterial.Value.material, typeof(Material), GUILayout.MinWidth(100f), GUILayout.MaxWidth(200f));
+
+                
+
+                playerColours.Add(materialName, editingMaterial);
 
                 if (GUILayout.Button("-", GUILayout.Width(20f)))
                 {
@@ -47,7 +66,7 @@ public class CostumeManagerEditor : Editor
                     Undo.RecordObject(target, "Remove");
                 }
 
-                if (testName != materialName || testMaterial != materialMat)
+                if (testName != materialName || editingMaterial != costumeMaterial.Value)
                 {
                     EditorUtility.SetDirty(target);
 
@@ -74,19 +93,36 @@ public class CostumeManagerEditor : Editor
         {
             Dictionary<string, PlayerModel> playerModels = new Dictionary<string, PlayerModel>();
 
+            GUILayout.BeginHorizontal();
+
+            GUILayout.Label("Name", GUILayout.Width(nameWidth));
+            GUILayout.Label("Cost", GUILayout.Width(numberWidth));
+            GUILayout.Label("Model (Prefab)");
+
+            GUILayout.EndHorizontal();
+
             foreach (var playerModel in manager.playerModels)
             {
                 GUILayout.BeginHorizontal();
 
+                
+
                 string testName = playerModel.Key;
 
-                string modelName = GUILayout.TextField(playerModel.Key);
+
+                PlayerModel editingModel = playerModel.Value;
+
+                string modelName = GUILayout.TextField(playerModel.Key, GUILayout.Width(nameWidth));
+
+                editingModel.cost = EditorGUILayout.IntField(editingModel.cost, GUILayout.Width(numberWidth));
 
 
-                GameObject testMaterial = playerModel.Value.modelPrefab;
-                GameObject modelPrefab = (GameObject)EditorGUILayout.ObjectField(playerModel.Value.modelPrefab, typeof(GameObject), GUILayout.MinWidth(100f), GUILayout.MaxWidth(200f));
+                editingModel.modelPrefab = (GameObject)EditorGUILayout.ObjectField(editingModel.modelPrefab, typeof(GameObject), GUILayout.MinWidth(100f), GUILayout.MaxWidth(200f));
 
-                playerModels.Add(modelName, new PlayerModel(modelPrefab));
+
+                
+
+                playerModels.Add(modelName, editingModel);
 
                 if (GUILayout.Button("-", GUILayout.Width(20f)))
                 {
@@ -96,7 +132,8 @@ public class CostumeManagerEditor : Editor
                     Undo.RecordObject(target, "Remove");
                 }
 
-                if (testName != modelName || testMaterial != modelPrefab)
+                //If the value has been changed, We want to set as dirty
+                if (testName != modelName || editingModel != playerModel.Value)
                 {
                     EditorUtility.SetDirty(target);
 
@@ -104,6 +141,7 @@ public class CostumeManagerEditor : Editor
                 }
 
                 GUILayout.EndHorizontal();
+
             }
 
             if (GUILayout.Button("+"))
@@ -112,6 +150,7 @@ public class CostumeManagerEditor : Editor
                 EditorUtility.SetDirty(target);
                 Undo.RecordObject(target, "Add");
             }
+
             manager.playerModels = playerModels;
         }
 
