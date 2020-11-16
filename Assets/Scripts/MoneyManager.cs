@@ -8,6 +8,8 @@ public class MoneyManager : MonoBehaviour
     [ReadOnly]
     public int moneyCount;
 
+    public MoneyVisual moneyDisplay;
+
     private void Start()
     {
         LoadMoney();
@@ -23,6 +25,7 @@ public class MoneyManager : MonoBehaviour
         else
         {
             moneyCount += amount;
+            moneyDisplay.PlayAnimation();
         }
         SaveMoney();
     }
@@ -56,7 +59,17 @@ public class MoneyManager : MonoBehaviour
         }
     }
 
+    [ContextMenu("Reset Money")]
+    public void ResetMoney()
+    {
+        moneyCount = 0;
+        SaveMoney();
+    }
 
+    public void ToggleDisplay(bool shouldEnable)
+    {
+        moneyDisplay.gameObject.SetActive(shouldEnable);
+    }
 
     #region Player Prefs
     void SaveMoney()
@@ -79,12 +92,7 @@ public class MoneyManager : MonoBehaviour
     #endregion
 
 
-    [ContextMenu("Reset Money")]
-    public void ResetMoney()
-    {
-        moneyCount = 0;
-        SaveMoney();
-    }
+  
 
     #region Singleton
 
