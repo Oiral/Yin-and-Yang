@@ -19,6 +19,11 @@ public class TouchInputScript : MonoBehaviour {
 
     private void Update()
     {
+        if (AdManager.instance.IsAdRunning())
+        {
+            //We want to not take any inputs if there is an ad running
+            return;
+        }
         if (Input.GetMouseButtonDown(0))
         {
             mouseInitialPos = Input.mousePosition;

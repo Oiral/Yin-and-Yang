@@ -48,7 +48,7 @@ public class LevelManagerScript : MonoBehaviour {
 
     public void NextLevel()
     {
-        Debug.Log("Scene loading");
+        //Debug.Log("Scene loading");
 
         //UIScript.instance.SetMainMenu(false);
         //UIScript.instance.SetPauseMenu(false);
@@ -89,6 +89,8 @@ public class LevelManagerScript : MonoBehaviour {
             LoadMainMenu();
             yield break;
         }
+
+        AdManager.instance.RunAd();
 
         yield return new WaitForSeconds(waitTime * 0.2f);
 
@@ -134,7 +136,7 @@ public class LevelManagerScript : MonoBehaviour {
 
     public void SaveScore(int score)
     {
-        Debug.Log(SceneManager.GetActiveScene().name);
+        //Debug.Log(SceneManager.GetActiveScene().name);
         if (PlayerPrefs.HasKey(SceneManager.GetActiveScene().name) == false)
         {
             PlayerPrefs.SetInt(SceneManager.GetActiveScene().name, score);
