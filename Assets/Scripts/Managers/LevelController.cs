@@ -45,9 +45,17 @@ public class LevelController : MonoBehaviour
 
    public bool CheckAllKeysOnPlayer()
     {
+        
+
         //if all keys are in the same spot as the player
 
         TileScript playerTile = controller.playerMoveScript.currentTile;
+
+        //If the player is on the goal, This should return true
+        if (playerTile.Type == TileType.Goal)
+        {
+            return true;
+        }
 
         bool allKeysOnPlayer = true;
 

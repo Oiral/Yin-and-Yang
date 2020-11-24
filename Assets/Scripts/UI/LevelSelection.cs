@@ -13,10 +13,13 @@ public class LevelSelection : MonoBehaviour
 
     public LevelManagerScript levelManager;
 
+    public List<int> levelBreaks;
 
     private void Start()
     {
         bool previousLevelCompleted = true;
+
+        float count = 0;
 
         for (int i = 1; i < SceneManager.sceneCountInBuildSettings; i++)
         {
@@ -28,7 +31,7 @@ public class LevelSelection : MonoBehaviour
                 GameObject spawnedButton = Instantiate(levelButtonPrefab, transform);
                 LevelSelectionButton button = spawnedButton.GetComponent<LevelSelectionButton>();
 
-                button.textName.text = "Level " + i;
+                button.textName.text = i.ToString();
                 button.levelNum = i;
                 previousLevelCompleted = LevelCompleted(sceneName);
                 button.moveCountNum.text = GetMoveCount(sceneName);
@@ -42,7 +45,20 @@ public class LevelSelection : MonoBehaviour
                 previousLevelCompleted = false;
             }
 
+
             Instantiate(fillerPrefab, transform);
+
+            count += 2;
+
+            if (levelBreaks.Contains(i))
+            {
+                //Lets add a split in here
+                for (int b = 0; b < 3; b++)
+                {
+                    Instantiate(fillerPrefab, transform);
+                    count++;
+                }
+            }
 
         }
 
@@ -58,18 +74,18 @@ public class LevelSelection : MonoBehaviour
 
         Vector2 spacing = layoutGroup.spacing;
 
+        count = count / 6;
+        count = count * 2;
 
-        float count = SceneManager.sceneCountInBuildSettings;
-
-        count = (count / 3) * 2f;
-
-        Mathf.Ceil(count);
+        count = Mathf.Ceil(count);
 
         size.y = (cellSize.y + spacing.y) * count;
 
         size.y += layoutGroup.padding.bottom;
 
         size.y += layoutGroup.padding.top;
+
+        size.y += 50;
 
         GetComponent<RectTransform>().sizeDelta = size;
 

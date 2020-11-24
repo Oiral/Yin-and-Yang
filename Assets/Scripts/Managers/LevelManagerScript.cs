@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.Analytics;
 
 public class LevelManagerScript : MonoBehaviour {
 
@@ -81,6 +82,20 @@ public class LevelManagerScript : MonoBehaviour {
         }
 
         PlayerPrefs.SetInt(PrefsCurrentLevelKey, currentLevel + 1);
+        //PlayerController.instance.moveCount
+
+
+
+        Analytics.CustomEvent("Level Complete", new Dictionary<string, object>() {
+
+            {"LevelIndex", SceneManager.GetActiveScene().buildIndex},
+            {"LevelName", SceneManager.GetActiveScene().name },
+            {"Move",  PlayerController.instance.moveCount},
+            {"Best Move", PlayerPrefs.GetInt(SceneManager.GetActiveScene().name)
+    }
+        });
+
+        
 
         if (currentLevel + 1 == SceneManager.sceneCountInBuildSettings)
         {
@@ -119,6 +134,7 @@ public class LevelManagerScript : MonoBehaviour {
 
     public void LoadLevel(int num)
     {
+        AdManager.instance.ClearAdTimer();
         SceneManager.LoadScene(num);
     }
 
@@ -152,12 +168,15 @@ public class LevelManagerScript : MonoBehaviour {
     /// </summary>
     public void ResetEverything()
     {
+        Analytics.CustomEvent("Reset");
         PlayerPrefs.DeleteAll();
         LoadMainMenu();
     }
 
     public void Contine()
     {
+        AdManager.instance.ClearAdTimer();
+
         int sceneNum = 1;
 
         if (PlayerPrefs.HasKey(PrefsCurrentLevelKey))

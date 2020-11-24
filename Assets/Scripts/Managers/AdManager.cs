@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.Advertisements;
 using UnityEngine.SceneManagement;
+using UnityEngine.Analytics;
 
 public class AdManager : MonoBehaviour
 {
@@ -64,6 +65,7 @@ public class AdManager : MonoBehaviour
         if (CheckIfCanRunAd())
         {
             Debug.LogWarning("Ad");
+            Analytics.CustomEvent("Ad Run");
             Advertisement.Show();
 
             ClearAdTimer();
@@ -77,6 +79,7 @@ public class AdManager : MonoBehaviour
             return;
         }
         Advertisement.Show();
+        Analytics.CustomEvent("Ad Run");
         ClearAdTimer();
     }
 
@@ -89,7 +92,7 @@ public class AdManager : MonoBehaviour
     public bool CheckIfCanRunAd()
     {
         //return true;
-        if (count > levelsPerAd)
+        if (count >= levelsPerAd)
         {
             return true;
         }

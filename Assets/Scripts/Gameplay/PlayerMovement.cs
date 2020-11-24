@@ -290,6 +290,7 @@ public class PlayerMovement : MonoBehaviour {
             if (LevelController.instance.CheckAllKeysOnPlayer())
             {
                 //Just incase we run into a player or a key when moving and the next step is the goal, We want to stop movement
+                Debug.Log("Test Case");
                 break;
             }
         }

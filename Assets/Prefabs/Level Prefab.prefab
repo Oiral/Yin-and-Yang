@@ -1067,10 +1067,10 @@ RectTransform:
   m_LocalScale: {x: 0, y: 0, z: 0}
   m_Children:
   - {fileID: 6477872474241961428}
-  - {fileID: 6473808420721111976}
   - {fileID: 7357909810406027427}
-  - {fileID: 1635369494}
   - {fileID: 7543587511834083848}
+  - {fileID: 6473808420721111976}
+  - {fileID: 1635369494}
   m_Father: {fileID: 7366918875657824743}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -1215,7 +1215,7 @@ RectTransform:
   m_Children:
   - {fileID: 4079274898871162016}
   m_Father: {fileID: 6308452919679529639}
-  m_RootOrder: 1
+  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -1253,7 +1253,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6308452919679529639}
-  m_RootOrder: 4
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0}
   m_AnchorMax: {x: 0.5, y: 0}
@@ -13598,7 +13598,7 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 6308452919679529639}
-  m_RootOrder: 2
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 1, y: 1}
   m_AnchorMax: {x: 1, y: 1}
@@ -14324,7 +14324,7 @@ PrefabInstance:
     - target: {fileID: 3648873941780566741, guid: 5af19d9c5e49041aea697ed1c4e19421,
         type: 3}
       propertyPath: connections.Array.size
-      value: 7
+      value: 3
       objectReference: {fileID: 0}
     - target: {fileID: 3648873941780566741, guid: 5af19d9c5e49041aea697ed1c4e19421,
         type: 3}
@@ -14508,7 +14508,7 @@ PrefabInstance:
     - target: {fileID: 3648873941780566741, guid: 5af19d9c5e49041aea697ed1c4e19421,
         type: 3}
       propertyPath: connections.Array.size
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3648873941780566741, guid: 5af19d9c5e49041aea697ed1c4e19421,
         type: 3}
@@ -14692,7 +14692,7 @@ PrefabInstance:
     - target: {fileID: 3648873941780566741, guid: 5af19d9c5e49041aea697ed1c4e19421,
         type: 3}
       propertyPath: connections.Array.size
-      value: 4
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3648873941780566741, guid: 5af19d9c5e49041aea697ed1c4e19421,
         type: 3}
@@ -14866,7 +14866,7 @@ PrefabInstance:
     - target: {fileID: 3648873941780566741, guid: 5af19d9c5e49041aea697ed1c4e19421,
         type: 3}
       propertyPath: connections.Array.size
-      value: 2
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3648873941780566741, guid: 5af19d9c5e49041aea697ed1c4e19421,
         type: 3}
@@ -15041,7 +15041,7 @@ PrefabInstance:
     - target: {fileID: 5609508153377885185, guid: 23394922fcae04d848c81e7044d543aa,
         type: 3}
       propertyPath: m_RootOrder
-      value: 3
+      value: 4
       objectReference: {fileID: 0}
     - target: {fileID: 5609508153377885185, guid: 23394922fcae04d848c81e7044d543aa,
         type: 3}
@@ -15112,6 +15112,11 @@ PrefabInstance:
         type: 3}
       propertyPath: m_Name
       value: Settings Panel
+      objectReference: {fileID: 0}
+    - target: {fileID: 5609508153377885186, guid: 23394922fcae04d848c81e7044d543aa,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 23394922fcae04d848c81e7044d543aa, type: 3}
