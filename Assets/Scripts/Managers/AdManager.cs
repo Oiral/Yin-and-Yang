@@ -21,6 +21,8 @@ public class AdManager : MonoBehaviour
 
     public bool testMode = true;
 
+    public bool enableAds = true;
+
     public static AdManager instance;
 
     public void Awake()
@@ -36,7 +38,7 @@ public class AdManager : MonoBehaviour
             Destroy(gameObject);
         }
 
-        if (Advertisement.isSupported == false)
+        if (Advertisement.isSupported == false || enableAds == false)
         {
             //Ads are not supported, So no need to initilize ads
             return;
@@ -56,7 +58,7 @@ public class AdManager : MonoBehaviour
         count += 1;
 
         Debug.Log("Test");
-        if (Advertisement.isInitialized == false)
+        if (Advertisement.isInitialized == false || enableAds == false)
         {
             Debug.LogWarning("Ads are not initialized");
             return;
@@ -74,7 +76,7 @@ public class AdManager : MonoBehaviour
 
     public void ForceAd()
     {
-        if (Advertisement.isInitialized == false)
+        if (Advertisement.isInitialized == false || enableAds == false)
         {
             return;
         }
@@ -107,7 +109,7 @@ public class AdManager : MonoBehaviour
 
     public bool IsAdRunning()
     {
-        return Advertisement.isShowing;
+        return Advertisement.isShowing || !enableAds;
     }
 
 }

@@ -14304,9 +14304,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 42886b30078a9492c829122c413bbf7c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  levelsPerAd: 4
-  secPerAd: 60
+  levelsPerAd: 6
+  secPerAd: 90
   testMode: 1
+  enableAds: 0
 --- !u!1001 &752826907
 PrefabInstance:
   m_ObjectHideFlags: 0
