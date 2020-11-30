@@ -109,7 +109,11 @@ public class AdManager : MonoBehaviour
 
     public bool IsAdRunning()
     {
-        return Advertisement.isShowing || !enableAds;
+        if (enableAds == false)
+        {
+            return false;
+        }
+        return Advertisement.isShowing;
     }
 
 }

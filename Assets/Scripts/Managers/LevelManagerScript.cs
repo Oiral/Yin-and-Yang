@@ -84,18 +84,14 @@ public class LevelManagerScript : MonoBehaviour {
         PlayerPrefs.SetInt(PrefsCurrentLevelKey, currentLevel + 1);
         //PlayerController.instance.moveCount
 
-
-
-        Analytics.CustomEvent("Level Complete", new Dictionary<string, object>() {
+        Debug.Log(AnalyticsEvent.Custom("Level Complete", new Dictionary<string, object>() {
 
             {"LevelIndex", SceneManager.GetActiveScene().buildIndex},
             {"LevelName", SceneManager.GetActiveScene().name },
             {"Move",  PlayerController.instance.moveCount},
-            {"Best Move", PlayerPrefs.GetInt(SceneManager.GetActiveScene().name)
-    }
-        });
+            {"Best Move", PlayerPrefs.GetInt(SceneManager.GetActiveScene().name)}
 
-        
+        }));
 
         if (currentLevel + 1 == SceneManager.sceneCountInBuildSettings)
         {
@@ -168,7 +164,7 @@ public class LevelManagerScript : MonoBehaviour {
     /// </summary>
     public void ResetEverything()
     {
-        Analytics.CustomEvent("Reset");
+        AnalyticsEvent.Custom("Reset");
         PlayerPrefs.DeleteAll();
         LoadMainMenu();
     }
