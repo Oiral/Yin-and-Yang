@@ -15353,6 +15353,7 @@ MonoBehaviour:
   - Red
   - Orange
   - Black
+  - Yellow
   _modelKeys:
   - Default
   - Castle
@@ -15382,6 +15383,9 @@ MonoBehaviour:
     unlocked: 0
     cost: 0
   - material: {fileID: 2100000, guid: 9a28d87318933409d85b9458602490c5, type: 2}
+    unlocked: 0
+    cost: 0
+  - material: {fileID: 2100000, guid: fb003dafba7204e03beab79245bb90b5, type: 2}
     unlocked: 0
     cost: 0
   _modelValues:

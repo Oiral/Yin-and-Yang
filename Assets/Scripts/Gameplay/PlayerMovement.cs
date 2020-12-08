@@ -152,9 +152,13 @@ public class PlayerMovement : MonoBehaviour {
         }
 
         //If we cannot move
-        LookAtConnection(dir);
-        Animate("Attempt");
-        PlaySound("Not Move");
+        if (primary)
+        {
+            LookAtConnection(dir);
+            Animate("Attempt");
+            PlaySound("Not Move");
+
+        }
         return false;
     }
 
