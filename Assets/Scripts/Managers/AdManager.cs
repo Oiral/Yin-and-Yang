@@ -14,9 +14,9 @@ public class AdManager : MonoBehaviour
     public int secPerAd = 60;
 
 #if UNITY_IOS
-    private string gameID = "3907258";
+    private string gameID = "3907238";
 #elif UNITY_ANDROID
-    private string gameID = "3907259";
+    private string gameID = "3907239";
 #endif
 
     public bool testMode = true;
