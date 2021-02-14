@@ -14307,7 +14307,7 @@ MonoBehaviour:
   levelsPerAd: 6
   secPerAd: 90
   testMode: 0
-  enableAds: 1
+  enableAds: 0
 --- !u!1001 &752826907
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -15562,6 +15562,7 @@ MonoBehaviour:
     type: 3}
   levelManager: {fileID: 2074494352}
   levelBreaks: 0d0000001900000025000000300000003a00000044000000
+  forceUnlock: 1
 --- !u!1001 &1148247901
 PrefabInstance:
   m_ObjectHideFlags: 0

@@ -15,6 +15,8 @@ public class LevelSelection : MonoBehaviour
 
     public List<int> levelBreaks;
 
+    public bool forceUnlock;
+
     private void Start()
     {
         bool previousLevelCompleted = true;
@@ -26,7 +28,7 @@ public class LevelSelection : MonoBehaviour
             string sceneName = System.IO.Path.GetFileNameWithoutExtension(SceneUtility.GetScenePathByBuildIndex(i));
             //Debug.Log(SceneManager.GetSceneByBuildIndex(i).name);
 
-            if (LevelCompleted(sceneName) || previousLevelCompleted)
+            if (forceUnlock || LevelCompleted(sceneName) || previousLevelCompleted)
             {
                 GameObject spawnedButton = Instantiate(levelButtonPrefab, transform);
                 LevelSelectionButton button = spawnedButton.GetComponent<LevelSelectionButton>();
