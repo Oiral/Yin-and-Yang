@@ -8,6 +8,21 @@ public class LevelEditor : MonoBehaviour
 
     public GameObject[] board;
 
+    //Use this to store the board tiles
+    public Dictionary<Vector2Int, EditorTile> newBoard;
+
+    #region Dictionary Functions
+    public bool CheckValue(Vector2Int value, Vector2Int direction)
+    {
+        return newBoard.ContainsKey(value + direction);
+    }
+
+    public bool CheckValue(Vector2Int value)
+    {
+        return newBoard.ContainsKey(value);
+    }
+    #endregion
+
     public Vector2Int startingSize = new Vector2Int(2, 5);
 
     public Transform boardTransform;
@@ -48,4 +63,6 @@ public class LevelEditor : MonoBehaviour
     {
         return (x * startingSize.y) + (y);
     }
+
+
 }
