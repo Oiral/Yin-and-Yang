@@ -4,9 +4,19 @@ using UnityEngine;
 
 public class LevelEditor : MonoBehaviour
 {
+    #region Singleton
+    public static LevelEditor instance;
+    private void Awake()
+    {
+        instance = this;
+    }
+    #endregion
+
     public GameObject ghostPrefab;
 
     public GameObject[] board;
+
+    
 
     //Use this to store the board tiles
     public Dictionary<Vector2Int, EditorTile> newBoard;
