@@ -19,8 +19,7 @@ public class EditorTile : MonoBehaviour
     private void OnMouseUpAsButton()
     {
         Debug.Log(LevelEditor.PosToKey(transform.position), gameObject);
-        type = LevelEditor.instance.editingType;
-        LevelEditor.instance.UpdateGhosts(LevelEditor.PosToKey(transform.position));
+        LevelEditor.instance.TileClicked(this);
     }
 
     public void UpdateVisuals()

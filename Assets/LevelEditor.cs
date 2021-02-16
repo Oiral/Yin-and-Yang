@@ -2,6 +2,8 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+public enum EditingActions {Add, Remove, Edit };
+
 public class LevelEditor : MonoBehaviour
 {
     #region Singleton
@@ -53,6 +55,46 @@ public class LevelEditor : MonoBehaviour
     public CostumeSO costume;
 
     public TileType editingType = TileType.Default;
+    public EditingActions currentAction;
+
+    #region Action Controls
+    public void ChangeEditingAction(EditingActions newAction)
+    {
+        if (newAction == currentAction) { return; }
+
+        currentAction = newAction;
+        switch (newAction)
+        {
+            case EditingActions.Add:
+                UpdateGhosts();
+                break;
+            case EditingActions.Remove:
+                RemoveGhosts();
+                break;
+            case EditingActions.Edit:
+                RemoveGhosts();
+                break;
+            default:
+                Debug.LogWarning("Cannot find an Editing action");
+                break;
+        }
+    }
+    public void ChangeEditingTile(TileType type)
+    {
+        editingType = type;
+    }
+
+    public void ChangeEditingTile(int type)
+    {
+        ChangeEditingTile((TileType)type);
+    }
+
+    public void ChangeEditingAction(int newAction)
+    {
+        ChangeEditingAction((EditingActions)newAction);
+    }
+
+    #endregion
 
     private void Start()
     {
@@ -70,14 +112,28 @@ public class LevelEditor : MonoBehaviour
         */
     }
 
+    public void RemoveGhosts()
+    {
+        List<EditorTile> toRemove = new List<EditorTile>();
+        foreach (EditorTile tile in newBoard.Values)
+        {
+            if (tile.type == TileType.Ghost)
+            {
+                toRemove.Add(tile);
+            }
+        }
+
+        for (int i = 0; i < toRemove.Count; i++)
+        {
+            RemoveFromBoard(toRemove[0]);
+        }
+    }
+
     public void UpdateGhosts()
     {
         foreach (EditorTile tile in newBoard.Values)
         {
             Vector2Int tilePos = PosToKey(tile.transform.position);
-
-            //If it is a ghost tile, We don't want any more
-            if (tile.type == TileType.Ghost) { continue; }
 
             UpdateGhosts(tilePos);
         }
@@ -85,12 +141,39 @@ public class LevelEditor : MonoBehaviour
 
     public void UpdateGhosts(Vector2Int pos)
     {
-        foreach (Vector2Int dir in vector2Directions)
+        if (newBoard[pos].type == TileType.Ghost)
         {
-            //If there is something in the way, Next
-            if (CheckValue(pos, dir)) { continue; }
+            bool hasConnectingTile = false;
 
-            SpawnInBoard(pos + dir, ghostPrefab);
+            //If this is a ghost, Lets check if there is a normal block next to this
+            foreach (Vector2Int dir in vector2Directions)
+            {
+                //If there is something in the way, Next
+                if (CheckValue(pos, dir) == false) { continue; }
+
+                if (newBoard[pos + dir].type != TileType.Ghost)
+                {
+                    hasConnectingTile = true;
+                    break;
+                }
+            }
+
+            if (hasConnectingTile == false)
+            {
+                //Lets remove this tile
+                RemoveFromBoard(pos);
+            }
+        }
+        else
+        {
+
+            foreach (Vector2Int dir in vector2Directions)
+            {
+                //If there is something in the way, Next
+                if (CheckValue(pos, dir)) { continue; }
+
+                SpawnInBoard(pos + dir, ghostPrefab);
+            }
         }
     }
 
@@ -108,7 +191,40 @@ public class LevelEditor : MonoBehaviour
         }
         newBoard[pos] = Instantiate(toBeAdded, KeyToPos(pos), Quaternion.identity, boardTransform).GetComponent<EditorTile>();
     }
+    public void RemoveFromBoard(Vector2Int pos)
+    {
+        EditorTile tile = newBoard[pos];
 
+        newBoard.Remove(pos);
+        Destroy(tile.gameObject);
+    }
+    public void RemoveFromBoard(EditorTile tile)
+    {
+        RemoveFromBoard(PosToKey(tile.transform.position));
+    }
 
+    public void TileClicked(EditorTile tile)
+    {
+        Vector2Int tileKey = PosToKey(tile.transform.position);
+
+        switch (currentAction)
+        {
+            case EditingActions.Add:
+                if (tile.type == TileType.Ghost)
+                {
+                    tile.type = TileType.Default;
+                }
+                UpdateGhosts(tileKey);
+                break;
+            case EditingActions.Remove:
+                
+                break;
+            case EditingActions.Edit:
+                tile.type = editingType;
+                break;
+            default:
+                break;
+        }
+    }
 
 }
