@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum TileType { Default,Teleport,Goal,Block,Ice,Jelly,Button,Conveyor}
+public enum TileType { Default, Teleport, Goal, Block, Ice, Jelly, Button, Conveyor, Ghost }
 
 public class TileScript : MonoBehaviour {
     public TileConnectionsScript topPoint;

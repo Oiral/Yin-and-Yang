@@ -293,9 +293,15 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   ghostPrefab: {fileID: 3648873940650891331, guid: 3464d056dc45d4674b254bcec41a78af,
     type: 3}
-  board: []
-  startingSize: {x: 10, y: 5}
+  vector2Directions:
+  - {x: 0, y: 1}
+  - {x: 0, y: -1}
+  - {x: -1, y: 0}
+  - {x: 1, y: 0}
+  startingSize: {x: 1, y: 1}
   boardTransform: {fileID: 1668135053}
+  costume: {fileID: 11400000, guid: d5a7ac438b2bb41d9a2a21992f2b8afb, type: 2}
+  editingType: 0
 --- !u!4 &1425722954
 Transform:
   m_ObjectHideFlags: 0

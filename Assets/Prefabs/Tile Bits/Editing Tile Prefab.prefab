@@ -74,7 +74,7 @@ MeshRenderer:
   m_IgnoreNormalsForChartDetection: 0
   m_ImportantGI: 0
   m_StitchLightmapSeams: 1
-  m_SelectedEditorRenderState: 2
+  m_SelectedEditorRenderState: 3
   m_MinimumChartSize: 4
   m_AutoUVMaxDistance: 0.5
   m_AutoUVMaxAngle: 89
@@ -2196,6 +2196,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3648873940650891390}
   - component: {fileID: 3536204698349799601}
+  - component: {fileID: 114892798}
   m_Layer: 0
   m_Name: Editing Tile Prefab
   m_TagString: Tile
@@ -2230,4 +2231,18 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fcd67fa6faae8429dac1b4abba956171, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  type: 0
+  testMaterial: {fileID: 2100000, guid: 8291bd461663a4ebe9300209b517bf8a, type: 2}
+  height: 0
+--- !u!65 &114892798
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3648873940650891331}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
