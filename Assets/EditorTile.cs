@@ -25,8 +25,20 @@ public class EditorTile : MonoBehaviour
     public void UpdateVisuals()
     {
         //Lets update the visuals of the tile
+        /*
+        GetComponentInChildren<MeshRenderer>().sharedMaterials[0] = LevelEditor.instance.costume.GetMaterial(_type);
+        GetComponentInChildren<MeshRenderer>().sharedMaterials[1] = LevelEditor.instance.costume.GetMaterial(_type);
         GetComponentInChildren<MeshRenderer>().materials[0] = LevelEditor.instance.costume.GetMaterial(_type);
-        GetComponentInChildren<MeshRenderer>().materials[1] = LevelEditor.instance.costume.GetMaterial(_type);
+        */
+        Material[] matToSet = LevelEditor.instance.costume.GetMaterial(_type);
+
+        GetComponentInChildren<MeshRenderer>().materials = matToSet;
+
+
+        Debug.Log(_type.ToString(), GetComponentInChildren<MeshRenderer>());
+
+        //GetComponentInChildren<MeshRenderer>().sharedMaterials[0] = testMaterial;
+        //GetComponentInChildren<MeshRenderer>().sharedMaterials[1] = testMaterial;
     }
 
 }

@@ -100,6 +100,7 @@ public class LevelEditor : MonoBehaviour
     {
         SpawnInBoard(Vector2Int.zero, ghostPrefab);
         newBoard[Vector2Int.zero].type = TileType.Default;
+        newBoard[Vector2Int.zero].UpdateVisuals();
 
         /*
         for (int x = 0; x < startingSize.x; x++)
@@ -112,6 +113,8 @@ public class LevelEditor : MonoBehaviour
         */
     }
 
+    
+
     public void RemoveGhosts()
     {
         List<EditorTile> toRemove = new List<EditorTile>();
@@ -123,15 +126,18 @@ public class LevelEditor : MonoBehaviour
             }
         }
 
-        for (int i = 0; i < toRemove.Count; i++)
+        while (toRemove.Count > 0)
         {
             RemoveFromBoard(toRemove[0]);
+            toRemove.RemoveAt(0);
         }
     }
 
     public void UpdateGhosts()
     {
-        foreach (EditorTile tile in newBoard.Values)
+        List<EditorTile> tempTileList = new List<EditorTile>(newBoard.Values);
+
+        foreach (EditorTile tile in tempTileList)
         {
             Vector2Int tilePos = PosToKey(tile.transform.position);
 
@@ -190,6 +196,7 @@ public class LevelEditor : MonoBehaviour
             Destroy(newBoard[pos]);
         }
         newBoard[pos] = Instantiate(toBeAdded, KeyToPos(pos), Quaternion.identity, boardTransform).GetComponent<EditorTile>();
+        newBoard[pos].UpdateVisuals();
     }
     public void RemoveFromBoard(Vector2Int pos)
     {
@@ -217,7 +224,7 @@ public class LevelEditor : MonoBehaviour
                 UpdateGhosts(tileKey);
                 break;
             case EditingActions.Remove:
-                
+                RemoveFromBoard(tile);
                 break;
             case EditingActions.Edit:
                 tile.type = editingType;

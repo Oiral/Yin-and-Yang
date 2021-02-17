@@ -26,37 +26,42 @@ public class CostumeSO : ScriptableObject
     [Header("Prefabs")]
     public GameObject teleporterPrefab;
 
-    public Material GetMaterial(TileType type)
+    public Material[] GetMaterial(TileType type)
     {
+        //The 0th is the walls of the tile - The 1st is the Top of the tile
+        Material[] toReturn = new Material[] {defaultTile, defaultTile};
+
         switch (type)
         {
-            case TileType.Default:
-                return defaultTile;
-
             case TileType.Goal:
-                return goalClosed;
+                toReturn[1] = goalClosed;
+                break;
 
             case TileType.Block:
-                return defaultTile;
+                toReturn[0] = null;
+                break;
 
             case TileType.Ice:
-                return ice;
+                toReturn[0] = toReturn[1] = ice;
+                break;
 
             case TileType.Jelly:
-                return jelly;
+                toReturn[0] = toReturn[1] = jelly;
+                break;
 
             case TileType.Button:
-                return buttonType1;
+                toReturn[1] = buttonType1;
+                break;
 
             case TileType.Conveyor:
-                return conveyor;
+                toReturn[1] = conveyor;
+                break;
 
             case TileType.Ghost:
-                return editorGhost;
-
-            default:
-                return null;
+                toReturn[0] = toReturn[1] = editorGhost;
+                break;
         }
+        return toReturn;
     }
 
 }
