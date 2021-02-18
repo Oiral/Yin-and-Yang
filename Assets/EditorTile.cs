@@ -15,6 +15,7 @@ public class EditorTile : MonoBehaviour
 
     TileType _type = TileType.Ghost;
     public float height = 0f;
+    public float heightAdjustment = 0.25f;
 
     private void OnMouseUpAsButton()
     {
@@ -39,6 +40,12 @@ public class EditorTile : MonoBehaviour
 
         //GetComponentInChildren<MeshRenderer>().sharedMaterials[0] = testMaterial;
         //GetComponentInChildren<MeshRenderer>().sharedMaterials[1] = testMaterial;
+    }
+
+    public void UpdateHeight(int amount)
+    {
+        transform.position += Vector3.up * (amount * heightAdjustment);
+        height += amount * heightAdjustment;
     }
 
 }

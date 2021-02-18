@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
-public enum EditingActions {Add, Remove, Edit };
+public enum EditingActions {Add, Remove, Edit , HeightUp, HeightDown};
 
 public class LevelEditor : MonoBehaviour
 {
@@ -63,20 +63,13 @@ public class LevelEditor : MonoBehaviour
         if (newAction == currentAction) { return; }
 
         currentAction = newAction;
-        switch (newAction)
+        if (newAction == EditingActions.Add)
         {
-            case EditingActions.Add:
-                UpdateGhosts();
-                break;
-            case EditingActions.Remove:
-                RemoveGhosts();
-                break;
-            case EditingActions.Edit:
-                RemoveGhosts();
-                break;
-            default:
-                Debug.LogWarning("Cannot find an Editing action");
-                break;
+            UpdateGhosts();
+        }
+        else
+        {
+            RemoveGhosts();
         }
     }
     public void ChangeEditingTile(TileType type)
@@ -228,6 +221,12 @@ public class LevelEditor : MonoBehaviour
                 break;
             case EditingActions.Edit:
                 tile.type = editingType;
+                break;
+            case EditingActions.HeightDown:
+                tile.UpdateHeight(-1);
+                break;
+            case EditingActions.HeightUp:
+                tile.UpdateHeight(1);
                 break;
             default:
                 break;
