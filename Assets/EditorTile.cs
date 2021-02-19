@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[System.Serializable]
 public class EditorTile : MonoBehaviour
 {
     public TileType type {
@@ -15,7 +16,9 @@ public class EditorTile : MonoBehaviour
 
     TileType _type = TileType.Ghost;
     public float height = 0f;
-    public float heightAdjustment = 0.25f;
+    static float heightAdjustment = 0.25f;
+
+    public Vector2Int key;
 
     private void OnMouseUpAsButton()
     {
@@ -36,7 +39,7 @@ public class EditorTile : MonoBehaviour
         GetComponentInChildren<MeshRenderer>().materials = matToSet;
 
 
-        Debug.Log(_type.ToString(), GetComponentInChildren<MeshRenderer>());
+        //Debug.Log(_type.ToString(), GetComponentInChildren<MeshRenderer>());
 
         //GetComponentInChildren<MeshRenderer>().sharedMaterials[0] = testMaterial;
         //GetComponentInChildren<MeshRenderer>().sharedMaterials[1] = testMaterial;

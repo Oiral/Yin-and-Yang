@@ -1,8 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using System.Linq;
 
-public enum EditingActions {Add, Remove, Edit , HeightUp, HeightDown};
+public enum EditingActions {Add, Remove, Edit , HeightUp, HeightDown, Player, Ring};
 
 public class LevelEditor : MonoBehaviour
 {
@@ -22,7 +23,10 @@ public class LevelEditor : MonoBehaviour
     //Use this to store the board tiles
     public Dictionary<Vector2Int, EditorTile> newBoard = new Dictionary<Vector2Int, EditorTile>();
 
-    
+    public Vector2Int playerLocation;
+    public Vector2Int ringLocation;
+    public EditorPlayer editorPlayer;
+    public EditorPlayer editorRing;
 
     #region Dictionary Functions
     public bool CheckValue(Vector2Int value, Vector2Int direction)
@@ -52,7 +56,13 @@ public class LevelEditor : MonoBehaviour
     public Vector2Int startingSize = new Vector2Int(2, 5);
 
     public Transform boardTransform;
+    public Transform gameBoard;
     public CostumeSO costume;
+
+    public GameObject editorUI;
+    public GameObject inGameUI;
+
+    public LevelLoader testLevelLoader;
 
     public TileType editingType = TileType.Default;
     public EditingActions currentAction;
@@ -190,6 +200,7 @@ public class LevelEditor : MonoBehaviour
         }
         newBoard[pos] = Instantiate(toBeAdded, KeyToPos(pos), Quaternion.identity, boardTransform).GetComponent<EditorTile>();
         newBoard[pos].UpdateVisuals();
+        newBoard[pos].key = pos;
     }
     public void RemoveFromBoard(Vector2Int pos)
     {
@@ -228,9 +239,57 @@ public class LevelEditor : MonoBehaviour
             case EditingActions.HeightUp:
                 tile.UpdateHeight(1);
                 break;
+            case EditingActions.Player:
+                playerLocation = PosToKey(tile.transform.position);
+                editorPlayer.hasBeenPlaced = true;
+                break;
+            case EditingActions.Ring:
+                ringLocation = PosToKey(tile.transform.position);
+                editorRing.hasBeenPlaced = true;
+                break;
             default:
                 break;
         }
     }
 
+    public void ToggleLevel(bool toggle)
+    {
+        boardTransform.gameObject.SetActive(!toggle);
+        inGameUI.SetActive(toggle);
+        editorUI.SetActive(!toggle);
+
+        if (toggle)
+        {
+            testLevelLoader.loadLevel(GenerateLevel());
+        }
+        else
+        {
+            //Lets destroy the thingy
+            foreach (Transform child in gameBoard.transform)
+            {
+                Destroy(child.gameObject);
+            }
+        }
+
+    }
+
+    public Level GenerateLevel()
+    {
+        Level levelToReturn = new Level();
+
+        RemoveGhosts();
+
+        levelToReturn.levelTiles = newBoard.Values.ToArray();
+        levelToReturn.date = System.DateTime.Today.ToShortDateString();
+        levelToReturn.playerPos = playerLocation;
+        levelToReturn.ringPos = ringLocation;
+        levelToReturn.name = "Test name";
+
+        if (currentAction == EditingActions.Add)
+        {
+            UpdateGhosts();
+        }
+
+        return levelToReturn;
+    }
 }
