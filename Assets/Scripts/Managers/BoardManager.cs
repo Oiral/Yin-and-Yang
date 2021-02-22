@@ -14,7 +14,9 @@ public class BoardManager : MonoBehaviour
     //public List<TileConnectionsScript> bottomTileConnections = new List<TileConnectionsScript>();
 
         [Header("Visual Prefabs")]
+        [SerializeField]
     public GameObject teleporterVisuals;
+    [SerializeField]
     public GameObject jellyVisuals;
     //public GameObject buttonVisuals;
 
@@ -84,59 +86,57 @@ public class BoardManager : MonoBehaviour
     }
 
     [Header("Materials")]
+    [SerializeField]
     public Material iceMaterial;
+    [SerializeField]
     public Material normalMaterial;
+    [SerializeField]
     public Material goalClosedMaterial;
+    [SerializeField]
     public Material goalOpenMaterial;
+    [SerializeField]
     public Material jellyMaterial;
+    [SerializeField]
     public Material teleporterMaterial;
+    [SerializeField]
     public Material buttonMaterial;
+    [SerializeField]
     public Material conveyorMaterial;
+
+    public CostumeSO costume;
+
+    bool goalOpen = false;
 
     public void ChangeGoalMaterial(bool isOpen)
     {
-        Material mat;
-
-        if (isOpen)
-        {
-            mat = goalOpenMaterial;
-        }
-        else
-        {
-            mat = goalClosedMaterial;
-        }
+        goalOpen = isOpen;
 
         foreach (TileScript tile in GetTiles(TileType.Goal))
         {
 
-            ChangeTileMaterial(tile, mat);
+            ChangeTileMaterial(tile);
         }
     }
-
-    public void ChangeTileMaterial (TileScript tile, Material materialToChangeTo)
+    /*
+    public void ChangeTileMaterial (TileScript tile)
     {
-        /*
-        if (tile.visual.GetComponent<MeshRenderer>().sharedMaterials[0] == materialToChangeTo)
-        {
-            return;
-        }*/
 
+        
+
+        
         Material[] rendererMats = tile.visual.GetComponent<MeshRenderer>().sharedMaterials;
 
         rendererMats[1] = materialToChangeTo;
         rendererMats[0] = normalMaterial;
 
         tile.visual.GetComponent<MeshRenderer>().sharedMaterials = rendererMats;
+        
     }
+    */
 
+    /*
     public void ChangeTileMaterial(TileScript tile, Material materialToChangeTo, Material secondaryMaterial)
     {
-        /*
-        if (tile.visual.GetComponent<MeshRenderer>().sharedMaterials[0] == materialToChangeTo)
-        {
-            return;
-        }
-        */
 
         Material[] rendererMats = tile.visual.GetComponent<MeshRenderer>().sharedMaterials;
 
@@ -145,9 +145,20 @@ public class BoardManager : MonoBehaviour
 
         tile.visual.GetComponent<MeshRenderer>().sharedMaterials = rendererMats;
     }
+    */
 
     public void ChangeTileMaterial(TileScript tile)
     {
+
+        if (tile.Type == TileType.Goal)
+        {
+            tile.visual.GetComponent<MeshRenderer>().sharedMaterials = costume.GetGoalMaterial(goalOpen);
+        }
+        else
+        {
+            tile.visual.GetComponent<MeshRenderer>().sharedMaterials = costume.GetMaterial(tile.Type);
+        }
+        /*
         switch (tile.Type)
         {
             case TileType.Ice:
@@ -188,6 +199,7 @@ public class BoardManager : MonoBehaviour
                 break;
 
         }
+        */
     }
 
     public void UpdateBoardVisuals()

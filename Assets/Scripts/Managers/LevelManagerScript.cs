@@ -78,7 +78,7 @@ public class LevelManagerScript : MonoBehaviour {
         //FindBoard
         if (GameObject.FindGameObjectWithTag("MainCamera") != null)
         {
-            GameObject.FindGameObjectWithTag("MainCamera").GetComponent<RotateBoard>().targetHeight = 15;
+            GameObject.FindGameObjectWithTag("MainCamera").GetComponentInParent<RotateBoard>().targetHeight = 15;
         }
 
         PlayerPrefs.SetInt(PrefsCurrentLevelKey, currentLevel + 1);

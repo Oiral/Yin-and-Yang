@@ -34,7 +34,7 @@ public class CostumeSO : ScriptableObject
         switch (type)
         {
             case TileType.Goal:
-                toReturn[1] = goalClosed;
+                toReturn = GetGoalMaterial(false);
                 break;
 
             case TileType.Block:
@@ -62,6 +62,11 @@ public class CostumeSO : ScriptableObject
                 break;
         }
         return toReturn;
+    }
+
+    public Material[] GetGoalMaterial(bool isOpen)
+    {
+        return new Material[] { defaultTile, isOpen ? goalOpen : goalClosed };
     }
 
 }
