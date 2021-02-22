@@ -17,6 +17,8 @@ public class AdManager : MonoBehaviour
     private string gameID = "3907238";
 #elif UNITY_ANDROID
     private string gameID = "3907239";
+#else
+    private string gameID = "";
 #endif
 
     public bool testMode = true;
